@@ -124,10 +124,6 @@ tbody tr:hover td{background:#f7fbf8;}
 .toast.show{opacity:1;transform:translateY(0);}
 .footer{text-align:center;padding:20px;font-size:11px;color:var(--text3);font-family:"JetBrains Mono",monospace;border-top:1px solid var(--border);background:var(--white);margin-top:32px;}
 .cbox{background:linear-gradient(135deg,#e8f5ee,#f0fdf4);border:1px solid rgba(26,122,60,0.2);border-radius:14px;padding:24px 28px;margin-bottom:20px;}
-.ctiles{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:16px;}
-.ctile{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:14px 20px;min-width:80px;text-align:center;box-shadow:var(--shadow);}
-.cnum{font-family:"JetBrains Mono",monospace;font-size:32px;font-weight:800;color:var(--green);line-height:1;}
-.clbl{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.07em;margin-top:4px;}
 @media(max-width:960px){.stats-grid{grid-template-columns:repeat(2,1fr)}.header-mid{display:none}}
 @media(max-width:640px){.cd-chip{display:none}th:nth-child(n+5),td:nth-child(n+5){display:none}.main{padding:16px 12px 40px}}
 </style>
@@ -160,22 +156,10 @@ tbody tr:hover td{background:#f7fbf8;}
     <div class="hero-sub">Real-time polling unit results from INEC IReV - Auto-refreshes every 90 seconds</div>
   </div>
 
-  <div style="background:linear-gradient(135deg,#e8f5ee,#f0fdf4);border:1px solid rgba(26,122,60,0.2);border-radius:14px;padding:24px 28px;margin-bottom:16px;">
-    <div style="text-align:center;margin-bottom:16px;">
-      <div style="font-size:13px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Ekiti Elections</div>
-      <div style="font-size:20px;font-weight:800;color:var(--text);letter-spacing:-0.3px;margin-bottom:4px;">Results not yet available</div>
-      <div style="font-size:14px;color:var(--text2);font-weight:500;">We are counting down to June 20th - We cannot wait too!</div>
-    </div>
-    <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">
-      <div class="ctile"><div class="cnum" id="K_D">--</div><div class="clbl">Days</div></div>
-      <div class="ctile"><div class="cnum" id="K_H">--</div><div class="clbl">Hours</div></div>
-      <div class="ctile"><div class="cnum" id="K_M">--</div><div class="clbl">Minutes</div></div>
-      <div class="ctile"><div class="cnum" id="K_S">--</div><div class="clbl">Seconds</div></div>
-    </div>
-    <div id="notLiveBanner" style="text-align:center;margin-top:18px;padding-top:16px;border-top:1px solid rgba(26,122,60,0.15);">
-      <div style="font-size:18px;font-weight:800;color:var(--text);margin-bottom:6px;">PU results will appear here</div>
-      <div style="font-size:14px;color:var(--green);font-weight:600;">We cannot wait to see the first result drop</div>
-    </div>
+  <div style="background:#e8f5ee;border:1px solid rgba(26,122,60,0.2);border-radius:14px;padding:24px 28px;margin-bottom:20px;text-align:center;" id="notLiveBanner">
+    <div style="font-size:13px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Ekiti Elections</div>
+    <div style="font-size:22px;font-weight:800;color:var(--text);margin-bottom:6px;">Results not yet available</div>
+    <div style="font-size:14px;color:var(--text2);font-weight:500;">We are counting down to June 20th &#8212; We cannot wait too!</div>
   </div>
 
   <div class="stats-grid">
@@ -465,33 +449,13 @@ function getRange(c, t) {
   return [1,"...",c-1,c,c+1,"...",t];
 }
 
-function june20() {
-  var ms = new Date(2025, 5, 20, 8, 0, 0).getTime() - Date.now();
-  if (ms < 0) ms = 0;
-  var D = Math.floor(ms / 86400000);
-  var H = Math.floor(ms % 86400000 / 3600000);
-  var M = Math.floor(ms % 3600000 / 60000);
-  var S = Math.floor(ms % 60000 / 1000);
-  function p(n) { return n < 10 ? "0" + n : "" + n; }
-  var eD = document.getElementById("K_D");
-  var eH = document.getElementById("K_H");
-  var eM = document.getElementById("K_M");
-  var eS = document.getElementById("K_S");
-  if (eD) eD.textContent = D;
-  if (eH) eH.textContent = p(H);
-  if (eM) eM.textContent = p(M);
-  if (eS) eS.textContent = p(S);
-}
-
 function startCD() {
   if (cdT) clearInterval(cdT);
   cd = RSEC;
-  june20();
   cdT = setInterval(function() {
     cd--;
     document.getElementById("cdNum").textContent = cd;
-    june20();
-    if (cd <= 0) {
+      if (cd <= 0) {
       cd = RSEC;
       fetch("config.json?" + Date.now())
         .then(function(r) { return r.json(); })
