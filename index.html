@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BRAVO — Ekiti 2025 Live Results</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>BRAVO - Ekiti 2025 Live Results</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --green:#1a7a3c;--green-mid:#22a050;--green-light:#e8f5ee;--green-glow:rgba(26,122,60,0.12);
+  --green:#1a7a3c;--green-mid:#22a050;--green-light:#e8f5ee;
   --white:#fff;--bg:#f2f5f3;--surface:#fff;--surface2:#f0f5f2;
   --border:#dde8e2;--border2:#c5d8cc;
   --text:#0d1f14;--text2:#4a6458;--text3:#8aab97;
@@ -16,11 +16,8 @@
   --blue:#2563eb;--blue-light:#eff6ff;
   --radius:12px;--radius-sm:8px;
   --shadow:0 1px 3px rgba(0,0,0,0.06),0 4px 16px rgba(0,0,0,0.04);
-  --shadow-md:0 4px 24px rgba(0,0,0,0.09);
 }
 body{font-family:"Plus Jakarta Sans",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;}
-
-/* HEADER */
 .header{background:var(--white);border-bottom:1px solid var(--border);padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:66px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow);}
 .brand{display:flex;align-items:center;gap:14px;}
 .brand-logo{height:44px;width:44px;object-fit:contain;border-radius:6px;}
@@ -28,40 +25,21 @@ body{font-family:"Plus Jakarta Sans",sans-serif;background:var(--bg);color:var(-
 .brand-name{font-size:15px;font-weight:800;color:var(--green);letter-spacing:-0.3px;}
 .brand-tag{font-size:11px;color:var(--text3);font-weight:500;margin-top:1px;}
 .header-mid{display:flex;flex-direction:column;align-items:center;gap:3px;}
-.el-badge{background:var(--green-light);border:1px solid var(--border2);border-radius:99px;padding:5px 18px;font-size:12px;font-weight:700;color:var(--green);letter-spacing:0.02em;}
+.el-badge{background:var(--green-light);border:1px solid var(--border2);border-radius:99px;padding:5px 18px;font-size:12px;font-weight:700;color:var(--green);}
 .el-date{font-size:11px;color:var(--text3);font-family:"JetBrains Mono",monospace;}
 .header-right{display:flex;align-items:center;gap:10px;}
-.live-chip{display:flex;align-items:center;gap:7px;background:var(--green);color:#fff;border-radius:99px;padding:7px 16px;font-size:12px;font-weight:700;letter-spacing:0.04em;}
+.live-chip{display:flex;align-items:center;gap:7px;background:var(--green);color:#fff;border-radius:99px;padding:7px 16px;font-size:12px;font-weight:700;}
 .live-dot{width:7px;height:7px;background:#fff;border-radius:50%;animation:pulse 1.5s ease-in-out infinite;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.75)}}
 .cd-chip{display:flex;align-items:center;gap:6px;background:var(--surface2);border:1px solid var(--border);border-radius:99px;padding:6px 14px;font-size:12px;color:var(--text2);font-family:"JetBrains Mono",monospace;}
 .cd-num{color:var(--green);font-weight:700;min-width:22px;text-align:center;}
-
-/* MAIN */
 .main{max-width:1300px;margin:0 auto;padding:24px 20px 56px;}
-
-/* HERO */
-.hero{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;margin-bottom:20px;box-shadow:var(--shadow);}
+.hero{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:28px 32px;margin-bottom:20px;box-shadow:var(--shadow);}
 .hero-title{font-size:24px;font-weight:800;color:var(--text);letter-spacing:-0.5px;line-height:1.2;}
 .hero-title em{color:var(--green);font-style:normal;}
 .hero-sub{font-size:13px;color:var(--text2);margin-top:6px;}
-.config-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:18px;min-width:330px;}
-.config-head{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
-.config-head::before{content:"";display:block;width:3px;height:12px;background:var(--green);border-radius:2px;}
-.irow{display:flex;gap:8px;align-items:center;margin-bottom:8px;}
-.itag{font-size:11px;font-weight:600;color:var(--text2);min-width:78px;}
-.cinput{font-family:"JetBrains Mono",monospace;font-size:11px;background:var(--white);border:1px solid var(--border2);border-radius:6px;padding:8px 10px;color:var(--text);flex:1;outline:none;transition:border-color 0.15s,box-shadow 0.15s;}
-.cinput:focus{border-color:var(--green-mid);box-shadow:0 0 0 3px var(--green-glow);}
-.cinput::placeholder{color:var(--text3);}
-.btn-go{width:100%;margin-top:6px;font-family:"Plus Jakarta Sans",sans-serif;font-size:13px;font-weight:700;background:var(--green);color:#fff;border:none;border-radius:8px;padding:11px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px;}
-.btn-go:hover{background:var(--green-mid);box-shadow:0 4px 12px rgba(26,122,60,0.28);transform:translateY(-1px);}
-.btn-go:active{transform:scale(0.98);}
-.btn-go:disabled{opacity:0.5;cursor:not-allowed;transform:none;box-shadow:none;}
-
-/* STATS */
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px;}
-.sc{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform 0.2s,box-shadow 0.2s;}
-.sc:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);}
+.sc{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);position:relative;overflow:hidden;}
 .sc::after{content:"";position:absolute;top:0;left:0;right:0;height:3px;border-radius:12px 12px 0 0;}
 .sc.g::after{background:var(--green);}
 .sc.a::after{background:var(--amber);}
@@ -80,37 +58,26 @@ body{font-family:"Plus Jakarta Sans",sans-serif;background:var(--bg);color:var(-
 .sc-val.a{color:var(--amber);}
 .sc-val.b{color:var(--blue);}
 .sc-sub{font-size:11px;color:var(--text3);margin-top:5px;}
-
-/* PROGRESS */
 .prog-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:18px 22px;margin-bottom:16px;box-shadow:var(--shadow);}
 .prog-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
 .prog-title{font-size:13px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px;}
 .prog-title::before{content:"";display:block;width:4px;height:16px;background:var(--green);border-radius:2px;}
 .prog-pct{font-family:"JetBrains Mono",monospace;font-size:22px;font-weight:700;color:var(--green);}
 .prog-track{background:var(--surface2);border:1px solid var(--border);border-radius:99px;height:12px;overflow:hidden;}
-.prog-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#1a7a3c,#22a050);transition:width 1.2s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden;}
-.prog-fill::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);animation:sw 2.5s infinite;}
-@keyframes sw{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.prog-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#1a7a3c,#22a050);transition:width 1.2s ease;}
 .prog-labels{display:flex;justify-content:space-between;margin-top:8px;}
 .prog-labels span{font-size:11px;color:var(--text3);font-family:"JetBrains Mono",monospace;}
 .prog-labels strong{color:var(--text2);}
-
-/* FILTERS */
 .fbar{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;margin-bottom:16px;box-shadow:var(--shadow);}
 .fg{display:flex;flex-direction:column;gap:4px;}
 .fl{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.07em;}
-select,.si{font-family:"Plus Jakarta Sans",sans-serif;font-size:13px;background:var(--surface2);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:8px 12px;color:var(--text);min-width:140px;outline:none;cursor:pointer;transition:border-color 0.15s;appearance:none;}
-select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 24 24' fill='none' stroke='%238aab97' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px;}
-select:focus,.si:focus{border-color:var(--green-mid);box-shadow:0 0 0 3px var(--green-glow);background-color:var(--white);}
-.si{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%238aab97' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:10px center;padding-left:30px;font-family:"JetBrains Mono",monospace;font-size:12px;}
+select,.si{font-family:"Plus Jakarta Sans",sans-serif;font-size:13px;background:var(--surface2);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:8px 12px;color:var(--text);min-width:140px;outline:none;cursor:pointer;appearance:none;}
+.si{padding-left:12px;font-family:"JetBrains Mono",monospace;font-size:12px;}
 .factions{margin-left:auto;display:flex;gap:8px;align-items:flex-end;}
 .btn{font-family:"Plus Jakarta Sans",sans-serif;font-size:12px;font-weight:600;padding:9px 16px;border-radius:var(--radius-sm);cursor:pointer;border:none;transition:all 0.15s;}
 .btn-out{background:var(--white);color:var(--text2);border:1px solid var(--border2);}
-.btn-out:hover{background:var(--surface2);}
 .btn-grn{background:var(--green);color:#fff;}
-.btn-grn:hover{background:var(--green-mid);box-shadow:0 2px 8px rgba(26,122,60,0.25);}
-
-/* TABLE */
+.btn-grn:hover{background:var(--green-mid);}
 .tcard{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
 .tbar{padding:14px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);}
 .ttitle{font-size:14px;font-weight:700;color:var(--text);}
@@ -130,9 +97,7 @@ tbody tr:hover td{background:#f7fbf8;}
 .pok{background:var(--green-light);color:var(--green);border:1px solid rgba(26,122,60,0.2);}
 .pwait{background:var(--amber-light);color:var(--amber);border:1px solid rgba(217,119,6,0.2);}
 .vbtn{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:600;color:var(--blue);background:var(--blue-light);border:1px solid rgba(37,99,235,0.15);border-radius:6px;padding:5px 11px;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.15s;}
-.vbtn:hover{background:#dbeafe;transform:translateY(-1px);}
-
-/* PAGINATION */
+.vbtn:hover{background:#dbeafe;}
 .pag{padding:12px 20px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);background:var(--surface2);}
 .pinfo{font-size:12px;color:var(--text3);font-family:"JetBrains Mono",monospace;}
 .pbtns{display:flex;gap:4px;}
@@ -140,16 +105,11 @@ tbody tr:hover td{background:#f7fbf8;}
 .pbtn:hover{background:var(--green-light);color:var(--green);}
 .pbtn.active{background:var(--green);color:#fff;border-color:var(--green);}
 .pbtn:disabled{opacity:0.35;cursor:default;}
-
-/* STATES */
-.sbox{padding:72px 20px;text-align:center;}
-.sicon{font-size:44px;margin-bottom:16px;}
-.stitle{font-size:17px;font-weight:700;color:var(--text);margin-bottom:8px;}
-.ssub{font-size:13px;color:var(--text3);line-height:1.7;max-width:440px;margin:0 auto;}
+.sbox{padding:60px 20px;text-align:center;}
+.stitle{font-size:20px;font-weight:800;color:var(--text);margin-bottom:10px;}
+.ssub{font-size:15px;color:var(--green);font-weight:600;line-height:1.6;}
 .spin{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:sp 0.75s linear infinite;margin:0 auto 16px;}
 @keyframes sp{to{transform:rotate(360deg)}}
-
-/* MODAL */
 .mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);backdrop-filter:blur(6px);z-index:999;align-items:center;justify-content:center;}
 .mbg.open{display:flex;}
 .modal{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;max-width:92vw;max-height:92vh;display:flex;flex-direction:column;box-shadow:0 32px 80px rgba(0,0,0,0.2);}
@@ -160,15 +120,15 @@ tbody tr:hover td{background:#f7fbf8;}
 .mbody{overflow:auto;}
 .mbody img{display:block;max-width:100%;max-height:80vh;}
 .mload{padding:48px;text-align:center;color:var(--text3);font-size:13px;}
-
-/* TOAST */
-.toast{position:fixed;bottom:24px;right:24px;background:var(--text);color:#fff;border-radius:10px;padding:12px 18px;font-size:13px;font-weight:500;opacity:0;transform:translateY(8px);transition:all 0.3s;pointer-events:none;z-index:9999;box-shadow:0 8px 30px rgba(0,0,0,0.12);}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--text);color:#fff;border-radius:10px;padding:12px 18px;font-size:13px;font-weight:500;opacity:0;transform:translateY(8px);transition:all 0.3s;pointer-events:none;z-index:9999;}
 .toast.show{opacity:1;transform:translateY(0);}
-
-/* FOOTER */
 .footer{text-align:center;padding:20px;font-size:11px;color:var(--text3);font-family:"JetBrains Mono",monospace;border-top:1px solid var(--border);background:var(--white);margin-top:32px;}
-
-@media(max-width:960px){.stats-grid{grid-template-columns:repeat(2,1fr)}.hero{grid-template-columns:1fr}.config-box{min-width:0}.header-mid{display:none}}
+.cbox{background:linear-gradient(135deg,#e8f5ee,#f0fdf4);border:1px solid rgba(26,122,60,0.2);border-radius:14px;padding:24px 28px;margin-bottom:20px;}
+.ctiles{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:16px;}
+.ctile{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:14px 20px;min-width:80px;text-align:center;box-shadow:var(--shadow);}
+.cnum{font-family:"JetBrains Mono",monospace;font-size:32px;font-weight:800;color:var(--green);line-height:1;}
+.clbl{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.07em;margin-top:4px;}
+@media(max-width:960px){.stats-grid{grid-template-columns:repeat(2,1fr)}.header-mid{display:none}}
 @media(max-width:640px){.cd-chip{display:none}th:nth-child(n+5),td:nth-child(n+5){display:none}.main{padding:16px 12px 40px}}
 </style>
 </head>
@@ -184,8 +144,8 @@ tbody tr:hover td{background:#f7fbf8;}
     </div>
   </div>
   <div class="header-mid">
-    <div class="el-badge">&#128393; Ekiti 2025 Governorship</div>
-    <div class="el-date">Election Day &mdash; June 20, 2025</div>
+    <div class="el-badge">Ekiti 2025 Governorship</div>
+    <div class="el-date">Election Day - June 20, 2025</div>
   </div>
   <div class="header-right">
     <div class="cd-chip">Refresh in <span class="cd-num" id="cdNum">90</span>s</div>
@@ -196,326 +156,405 @@ tbody tr:hover td{background:#f7fbf8;}
 <div class="main">
 
   <div class="hero">
-    <div class="hero-title">Ekiti State <em>Governorship</em> Election &mdash; Live Results</div>
-    <div class="hero-sub">Real-time polling unit results pulled directly from INEC IReV &middot; Auto-refreshes every 90 seconds</div>
+    <div class="hero-title">Ekiti State <em>Governorship</em> Election - Live Results</div>
+    <div class="hero-sub">Real-time polling unit results from INEC IReV - Auto-refreshes every 90 seconds</div>
   </div>
 
-  <div id="notLiveBanner" style="background:linear-gradient(135deg,#e8f5ee,#f0fdf4);border:1px solid rgba(26,122,60,0.2);border-radius:14px;padding:24px 28px;margin-bottom:20px;">
-    <div style="text-align:center;margin-bottom:18px;">
-      <div style="font-size:13px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">&#128393; Ekiti Elections</div>
+  <div style="background:linear-gradient(135deg,#e8f5ee,#f0fdf4);border:1px solid rgba(26,122,60,0.2);border-radius:14px;padding:24px 28px;margin-bottom:16px;">
+    <div style="text-align:center;margin-bottom:16px;">
+      <div style="font-size:13px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Ekiti Elections</div>
       <div style="font-size:20px;font-weight:800;color:var(--text);letter-spacing:-0.3px;margin-bottom:4px;">Results not yet available</div>
-      <div style="font-size:14px;color:var(--text2);font-weight:500;">We are counting down to June 20th &mdash; We can&rsquo;t wait too! &#127881;</div>
+      <div style="font-size:14px;color:var(--text2);font-weight:500;">We are counting down to June 20th - We cannot wait too!</div>
     </div>
     <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">
-      <div style="background:var(--white);border:1px solid var(--border);border-radius:12px;padding:14px 20px;min-width:80px;text-align:center;box-shadow:var(--shadow);">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:800;color:var(--green);line-height:1;" id="cdDays">--</div>
-        <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.07em;margin-top:4px;">Days</div>
-      </div>
-      <div style="background:var(--white);border:1px solid var(--border);border-radius:12px;padding:14px 20px;min-width:80px;text-align:center;box-shadow:var(--shadow);">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:800;color:var(--green);line-height:1;" id="cdHours">--</div>
-        <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.07em;margin-top:4px;">Hours</div>
-      </div>
-      <div style="background:var(--white);border:1px solid var(--border);border-radius:12px;padding:14px 20px;min-width:80px;text-align:center;box-shadow:var(--shadow);">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:800;color:var(--green);line-height:1;" id="cdMins">--</div>
-        <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.07em;margin-top:4px;">Minutes</div>
-      </div>
-      <div style="background:var(--white);border:1px solid var(--border);border-radius:12px;padding:14px 20px;min-width:80px;text-align:center;box-shadow:var(--shadow);">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:800;color:var(--green);line-height:1;" id="cdSecs">--</div>
-        <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.07em;margin-top:4px;">Seconds</div>
-      </div>
+      <div class="ctile"><div class="cnum" id="K_D">--</div><div class="clbl">Days</div></div>
+      <div class="ctile"><div class="cnum" id="K_H">--</div><div class="clbl">Hours</div></div>
+      <div class="ctile"><div class="cnum" id="K_M">--</div><div class="clbl">Minutes</div></div>
+      <div class="ctile"><div class="cnum" id="K_S">--</div><div class="clbl">Seconds</div></div>
     </div>
+    <div id="notLiveBanner" style="text-align:center;margin-top:18px;padding-top:16px;border-top:1px solid rgba(26,122,60,0.15);">
+      <div style="font-size:18px;font-weight:800;color:var(--text);margin-bottom:6px;">PU results will appear here</div>
+      <div style="font-size:14px;color:var(--green);font-weight:600;">We cannot wait to see the first result drop</div>
+    </div>
+  </div>
+
   <div class="stats-grid">
-    <div class="sc g">
-      <div class="sc-top"><div class="sc-icon g">&#127963;&#65039;</div><span class="sc-badge n" id="badgeTotal">Ekiti</span></div>
-      <div class="sc-label">Total polling units</div>
-      <div class="sc-val g" id="sTotal">&mdash;</div>
-      <div class="sc-sub">Expected statewide</div>
-    </div>
-    <div class="sc g">
-      <div class="sc-top"><div class="sc-icon g">&#9989;</div><span class="sc-badge g" id="badgeUp">&mdash;</span></div>
-      <div class="sc-label">Results uploaded</div>
-      <div class="sc-val g" id="sUp">&mdash;</div>
-      <div class="sc-sub" id="sPct">Awaiting data</div>
-    </div>
-    <div class="sc a">
-      <div class="sc-top"><div class="sc-icon a">&#9203;</div><span class="sc-badge n" id="badgePend">&mdash;</span></div>
-      <div class="sc-label">Awaiting upload</div>
-      <div class="sc-val a" id="sPend">&mdash;</div>
-      <div class="sc-sub">Not yet submitted</div>
-    </div>
-    <div class="sc b">
-      <div class="sc-top"><div class="sc-icon b">&#128203;</div><span class="sc-badge n" id="badgeLga">&mdash;</span></div>
-      <div class="sc-label">LGAs reporting</div>
-      <div class="sc-val b" id="sLga">&mdash;</div>
-      <div class="sc-sub">of 16 LGAs</div>
-    </div>
+    <div class="sc g"><div class="sc-top"><div class="sc-icon g">&#127963;</div><span class="sc-badge n" id="badgeTotal">Ekiti</span></div><div class="sc-label">Total polling units</div><div class="sc-val g" id="sTotal">-</div><div class="sc-sub">Expected statewide</div></div>
+    <div class="sc g"><div class="sc-top"><div class="sc-icon g">&#9989;</div><span class="sc-badge g" id="badgeUp">-</span></div><div class="sc-label">Results uploaded</div><div class="sc-val g" id="sUp">-</div><div class="sc-sub" id="sPct">Awaiting data</div></div>
+    <div class="sc a"><div class="sc-top"><div class="sc-icon a">&#9203;</div><span class="sc-badge n" id="badgePend">-</span></div><div class="sc-label">Awaiting upload</div><div class="sc-val a" id="sPend">-</div><div class="sc-sub">Not yet submitted</div></div>
+    <div class="sc b"><div class="sc-top"><div class="sc-icon b">&#128203;</div><span class="sc-badge n" id="badgeLga">-</span></div><div class="sc-label">LGAs reporting</div><div class="sc-val b" id="sLga">-</div><div class="sc-sub">of 16 LGAs</div></div>
   </div>
 
   <div class="prog-card">
-    <div class="prog-head">
-      <span class="prog-title">Upload coverage</span>
-      <span class="prog-pct" id="progPct">0%</span>
-    </div>
-    <div class="prog-track">
-      <div class="prog-fill" id="progFill" style="width:0%"></div>
-    </div>
-    <div class="prog-labels">
-      <span><strong id="progUp">0</strong> results uploaded</span>
-      <span><strong id="progTot">0</strong> total expected</span>
-    </div>
+    <div class="prog-head"><span class="prog-title">Upload coverage</span><span class="prog-pct" id="progPct">0%</span></div>
+    <div class="prog-track"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+    <div class="prog-labels"><span><strong id="progUp">0</strong> uploaded</span><span><strong id="progTot">0</strong> expected</span></div>
   </div>
 
   <div class="fbar">
     <div class="fg"><span class="fl">LGA</span><select id="lgaF" onchange="applyF()"><option value="">All LGAs</option></select></div>
     <div class="fg"><span class="fl">Ward</span><select id="wardF" onchange="applyF()"><option value="">All Wards</option></select></div>
-    <div class="fg"><span class="fl">Status</span>
-      <select id="statF" onchange="applyF()">
-        <option value="">All</option>
-        <option value="up">&#9989; Uploaded</option>
-        <option value="pend">&#9203; Pending</option>
-      </select>
-    </div>
-    <div class="fg"><span class="fl">Search</span><input type="text" class="si" id="srch" placeholder="PU name or code&hellip;" oninput="applyF()"></div>
-    <div class="factions">
-      <button class="btn btn-out" onclick="resetF()">&#8635; Reset</button>
-      <button class="btn btn-grn" onclick="exportCSV()">&#8595; Export CSV</button>
-    </div>
+    <div class="fg"><span class="fl">Status</span><select id="statF" onchange="applyF()"><option value="">All</option><option value="up">Uploaded</option><option value="pend">Pending</option></select></div>
+    <div class="fg"><span class="fl">Search</span><input type="text" class="si" id="srch" placeholder="PU name or code" oninput="applyF()"></div>
+    <div class="factions"><button class="btn btn-out" onclick="resetF()">Reset</button><button class="btn btn-grn" onclick="exportCSV()">Export CSV</button></div>
   </div>
 
   <div class="tcard">
     <div class="tbar">
-      <div>
-        <div class="ttitle">Polling Unit Results</div>
-        <div class="tcount" id="tcnt">&mdash;</div>
-      </div>
-      <div class="sync">
-        <span class="sdot" id="sdot"></span>
-        <span id="stxt">Not connected</span>
-      </div>
+      <div><div class="ttitle">Polling Unit Results</div><div class="tcount" id="tcnt">-</div></div>
+      <div class="sync"><span class="sdot" id="sdot"></span><span id="stxt">Loading...</span></div>
     </div>
     <div id="twrap">
       <div class="sbox">
-        <div class="sicon">&#128393;</div>
         <div class="stitle">PU results will appear here</div>
-        <div class="ssub"><br><br>We can&#39;t wait to see the first result drop</div>
+        <div class="ssub">We cannot wait to see the first result drop</div>
       </div>
     </div>
-    <div class="pag" id="pagBar" style="display:none">
-      <span class="pinfo" id="pinfo"></span>
-      <div class="pbtns" id="pbtns"></div>
-    </div>
+    <div class="pag" id="pagBar" style="display:none"><span class="pinfo" id="pinfo"></span><div class="pbtns" id="pbtns"></div></div>
   </div>
 </div>
 
 <div class="mbg" id="mbg" onclick="bgck(event)">
   <div class="modal">
-    <div class="mhead">
-      <span class="mtitle" id="mtitle">Result Image</span>
-      <button class="mclose" onclick="closeM()">&#x2715;</button>
-    </div>
-    <div class="mbody" id="mbody"><div class="mload"><div class="spin"></div>Loading&hellip;</div></div>
+    <div class="mhead"><span class="mtitle" id="mtitle">Result Image</span><button class="mclose" onclick="closeM()">X</button></div>
+    <div class="mbody" id="mbody"><div class="mload"><div class="spin"></div>Loading...</div></div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
-
-<div class="footer">The BRAVO EPPME &middot; Advanced Elections Management Systems &middot; Powered by INEC IReV</div>
+<div class="footer">The BRAVO EPPME - Advanced Elections Management Systems - Powered by INEC IReV</div>
 
 <script>
-const BASE="https://dolphin-app-sleqh.ondigitalocean.app/api/v1";
-const RPP=50,RSEC=90;
-let all=[],filtered=[],page=1,prevUp=0,cd=RSEC,cdT=null,running=false;
-let EID="",SID="13";
+var BASE = "https://dolphin-app-sleqh.ondigitalocean.app/api/v1";
+var RPP = 50;
+var RSEC = 90;
+var all = [];
+var filtered = [];
+var page = 1;
+var prevUp = 0;
+var cd = RSEC;
+var cdT = null;
+var running = false;
+var EID = "";
+var SID = "13";
 
-async function loadConfig(){
-  try{
-    const r=await fetch("config.json?t="+Date.now());
-    if(r.ok){
-      const cfg=await r.json();
-      EID=cfg.election_id||"";
-      SID=cfg.state_id||"13";
-    }
-  }catch(e){ EID=""; }
-  init();
+function loadConfig() {
+  fetch("config.json?" + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(cfg) {
+      EID = cfg.election_id || "";
+      SID = cfg.state_id || "13";
+      init();
+    })
+    .catch(function() {
+      EID = "";
+      init();
+    });
 }
 
-function init(){
-  if(!EID||EID==="PASTE_HERE_ON_JUNE_20"){
-    showNotLive();
+function init() {
+  if (!EID || EID === "PASTE_HERE_ON_JUNE_20") {
+    document.getElementById("stxt").textContent = "Waiting for election to go live";
     startCD();
     return;
   }
-  document.getElementById("notLiveBanner").style.display="none";
+  document.getElementById("notLiveBanner").style.display = "none";
   fetchAll();
   startCD();
 }
 
-function showNotLive(){
-  document.getElementById("stxt").textContent="Waiting for election to go live";
-  document.getElementById("twrap").innerHTML='<div class="sbox"><div class="stitle" style="font-size:20px;margin-bottom:12px;">PU results will appear here</div><div class="ssub" style="font-size:15px;color:var(--green);font-weight:600;">We can&#39;t wait to see the first result drop</div></div>';
+function apiGet(path) {
+  return fetch(BASE + "/" + path, { headers: { Accept: "application/json" } })
+    .then(function(r) {
+      if (!r.ok) throw new Error("API " + r.status);
+      return r.json();
+    })
+    .then(function(j) { return j.data || []; });
 }
 
-async function apiGet(p){
-  const r=await fetch(BASE+"/"+p,{headers:{Accept:"application/json"}});
-  if(!r.ok)throw new Error("API "+r.status);
-  return(await r.json()).data||[];
-}
+function fetchAll() {
+  fetch(BASE + "/elections/" + EID + "/result/stats", { headers: { Accept: "application/json" } })
+    .then(function(r) { return r.json(); })
+    .then(function(j) {
+      var s = j.data || {};
+      updProg(s.pus || 0, s.documents || 0);
+    })
+    .catch(function() {});
 
-async function fetchAll(){
-  try{
-    const sr=await fetch(BASE+"/elections/"+EID+"/result/stats",{headers:{Accept:"application/json"}});
-    if(sr.ok){const sd=(await sr.json()).data||{};updProg(sd.pus||0,sd.documents||0);}
-  }catch(e){}
-  let lgas;
-  try{ lgas=await apiGet("elections/"+EID+"/lga/state/"+SID); }
-  catch(e){ document.getElementById("stxt").textContent="IReV unreachable - retrying in 90s"; return; }
-  if(!lgas||!lgas.length){ document.getElementById("stxt").textContent="Election not live yet - retrying"; return; }
-  document.getElementById("notLiveBanner").style.display="none";
-  const lgaSel=document.getElementById("lgaF");
-  const curLga=lgaSel.value;
-  lgaSel.innerHTML='<option value="">All LGAs</option>';
-  const codes=new Set(all.map(p=>p.code));
-  let added=0;
-  for(const lo of lgas){
-    const ln=lo.lga?lo.lga.name:(lo.name||"");
-    const lm=lo.lga?lo.lga._id:(lo._id||"");
-    const opt=document.createElement("option");opt.value=ln;opt.textContent=ln;if(ln===curLga)opt.selected=true;lgaSel.appendChild(opt);
-    let wards=lo.wards||[];
-    if(!wards.length){try{const f=await apiGet("elections/"+EID+"/lga/"+lm);if(f&&f.wards)wards=f.wards;}catch(e){}}
-    for(const w of wards){
-      const wn=w.name||"",wid=w._id||"";
-      let pus=[];try{pus=await apiGet("elections/"+EID+"/pus?ward="+wid);}catch(e){}
-      for(const pu of pus){
-        const c=pu.pu_code||pu.code||"",img=getImg(pu);
-        if(!codes.has(c)){all.push({lga:ln,ward:wn,code:c,name:pu.name||"",imgUrl:img,uploadedAt:getT(pu)});codes.add(c);added++;}
-        else{const ex=all.find(p=>p.code===c);if(ex&&!ex.imgUrl&&img){ex.imgUrl=img;ex.uploadedAt=getT(pu);}}
+  apiGet("elections/" + EID + "/lga/state/" + SID)
+    .then(function(lgas) {
+      if (!lgas.length) {
+        document.getElementById("stxt").textContent = "Election not live yet - retrying in 90s";
+        return;
       }
-    }
-  }
-  const wardSel=document.getElementById("wardF");
-  const curWard=wardSel.value;
-  const uW=[...new Set(all.map(p=>p.ward).filter(Boolean))].sort();
-  wardSel.innerHTML='<option value="">All Wards</option>';
-  uW.forEach(w=>{const o=document.createElement("option");o.value=w;o.textContent=w;if(w===curWard)o.selected=true;wardSel.appendChild(o);});
-  const up=all.filter(p=>p.imgUrl).length,diff=up-prevUp;prevUp=up;
-  const lgaC=new Set(all.map(p=>p.lga).filter(Boolean)).size;
-  document.getElementById("sTotal").textContent=all.length.toLocaleString()||"-";
-  document.getElementById("sUp").textContent=up.toLocaleString()||"-";
-  document.getElementById("sPend").textContent=(all.length-up).toLocaleString()||"-";
-  document.getElementById("sLga").textContent=lgaC||"-";
-  document.getElementById("sPct").textContent=all.length?Math.round(up/all.length*100)+"% complete":"-";
-  document.getElementById("badgeUp").textContent=diff>0?"+"+diff:"-";
-  document.getElementById("badgeTotal").textContent=all.length;
-  document.getElementById("badgePend").textContent=all.length-up;
-  document.getElementById("badgeLga").textContent=lgaC+"/16";
-  const now=new Date().toLocaleTimeString();
-  document.getElementById("stxt").textContent="Updated "+now+(added?" (+"+added+" new)":"");
-  flash();running=true;applyF();
+      document.getElementById("notLiveBanner").style.display = "none";
+      return processLgas(lgas);
+    })
+    .catch(function() {
+      document.getElementById("stxt").textContent = "IReV unreachable - retrying in 90s";
+    });
 }
 
-function updProg(tot,docs){
-  const pct=tot?Math.round(docs/tot*100):0;
-  document.getElementById("progPct").textContent=pct+"%";
-  document.getElementById("progFill").style.width=pct+"%";
-  document.getElementById("progUp").textContent=docs.toLocaleString();
-  document.getElementById("progTot").textContent=tot.toLocaleString();
-}
-function getImg(pu){const d=pu.document||{};return d.url||d.link||pu.document_url||pu.result_url||"";}
-function getT(pu){const d=pu.document||{};const t=d.updated_at||d.created_at||"";return t?new Date(t).toLocaleString():"";}
-function applyF(){
-  const lga=document.getElementById("lgaF").value,ward=document.getElementById("wardF").value,stat=document.getElementById("statF").value,srch=document.getElementById("srch").value.toLowerCase();
-  filtered=all.filter(p=>{
-    if(lga&&p.lga!==lga)return false;if(ward&&p.ward!==ward)return false;
-    if(stat==="up"&&!p.imgUrl)return false;if(stat==="pend"&&p.imgUrl)return false;
-    if(srch&&!p.name.toLowerCase().includes(srch)&&!p.code.toLowerCase().includes(srch))return false;
-    return true;
-  });page=1;renderTable();
-}
-function resetF(){["lgaF","wardF","statF"].forEach(id=>document.getElementById(id).value="");document.getElementById("srch").value="";applyF();}
-function renderTable(){
-  const wrap=document.getElementById("twrap"),tot=filtered.length;
-  document.getElementById("tcnt").textContent=tot.toLocaleString()+" polling unit"+(tot!==1?"s":"");
-  if(!tot){if(all.length>0)wrap.innerHTML='<div class="sbox"><div class="sicon">magnify</div><div class="stitle">No results found</div><div class="ssub">Try adjusting your filters.</div></div>';document.getElementById("pagBar").style.display="none";return;}
-  const s=(page-1)*RPP,pg=filtered.slice(s,s+RPP);
-  let h='<div style="overflow-x:auto"><table><thead><tr><th>#</th><th>LGA</th><th>Ward</th><th>PU Code</th><th>PU Name</th><th>Uploaded At</th><th>Status</th><th>Result</th></tr></thead><tbody>';
-  pg.forEach((p,i)=>{
-    const n=s+i+1,has=!!p.imgUrl;
-    h+='<tr><td class="td-c">'+n+'</td><td class="td-lga">'+p.lga+'</td><td class="td-w">'+p.ward+'</td><td class="td-c">'+p.code+'</td><td>'+p.name+'</td><td class="td-c">'+( p.uploadedAt||"-")+'</td><td>'+( has?'<span class="pill pok">Uploaded</span>':'<span class="pill pwait">Pending</span>')+'</td><td>'+( has?'<button class="vbtn" onclick="openM(\''+ encodeURIComponent(p.imgUrl)+'\',\''+ encodeURIComponent(p.name)+'\')">View</button>':'<span style="color:var(--text3);font-size:12px">-</span>')+'</td></tr>';
+function processLgas(lgas) {
+  var lgaSel = document.getElementById("lgaF");
+  var curLga = lgaSel.value;
+  lgaSel.innerHTML = "<option value=\"\">All LGAs</option>";
+  var codes = {};
+  all.forEach(function(p) { codes[p.code] = true; });
+  var added = 0;
+  var chain = Promise.resolve();
+  lgas.forEach(function(lo) {
+    chain = chain.then(function() {
+      var ln = lo.lga ? lo.lga.name : (lo.name || "");
+      var lm = lo.lga ? lo.lga._id : (lo._id || "");
+      var opt = document.createElement("option");
+      opt.value = ln; opt.textContent = ln;
+      if (ln === curLga) opt.selected = true;
+      lgaSel.appendChild(opt);
+      var wards = lo.wards || [];
+      var wardProm = wards.length
+        ? Promise.resolve(wards)
+        : apiGet("elections/" + EID + "/lga/" + lm)
+            .then(function(f) { return (f && f.wards) ? f.wards : []; })
+            .catch(function() { return []; });
+      return wardProm.then(function(wards) {
+        var wchain = Promise.resolve();
+        wards.forEach(function(w) {
+          wchain = wchain.then(function() {
+            return apiGet("elections/" + EID + "/pus?ward=" + w._id)
+              .then(function(pus) {
+                pus.forEach(function(pu) {
+                  var c = pu.pu_code || pu.code || "";
+                  var img = getImg(pu);
+                  if (!codes[c]) {
+                    all.push({ lga: ln, ward: w.name || "", code: c, name: pu.name || "", imgUrl: img, uploadedAt: getT(pu) });
+                    codes[c] = true;
+                    added++;
+                  } else {
+                    var ex = all.filter(function(p) { return p.code === c; })[0];
+                    if (ex && !ex.imgUrl && img) { ex.imgUrl = img; ex.uploadedAt = getT(pu); }
+                  }
+                });
+              })
+              .catch(function() {});
+          });
+        });
+        return wchain;
+      });
+    });
   });
-  h+='</tbody></table></div>';wrap.innerHTML=h;renderPag(tot);
+  return chain.then(function() {
+    var wardSel = document.getElementById("wardF");
+    var curWard = wardSel.value;
+    var uW = [];
+    var seen = {};
+    all.forEach(function(p) { if (p.ward && !seen[p.ward]) { uW.push(p.ward); seen[p.ward] = true; } });
+    uW.sort();
+    wardSel.innerHTML = "<option value=\"\">All Wards</option>";
+    uW.forEach(function(w) {
+      var o = document.createElement("option");
+      o.value = w; o.textContent = w;
+      if (w === curWard) o.selected = true;
+      wardSel.appendChild(o);
+    });
+    var up = all.filter(function(p) { return !!p.imgUrl; }).length;
+    var diff = up - prevUp; prevUp = up;
+    var lgaCount = (function() { var s = {}; all.forEach(function(p) { if (p.lga) s[p.lga] = true; }); return Object.keys(s).length; })();
+    document.getElementById("sTotal").textContent = all.length || "-";
+    document.getElementById("sUp").textContent = up || "-";
+    document.getElementById("sPend").textContent = (all.length - up) || "-";
+    document.getElementById("sLga").textContent = lgaCount || "-";
+    document.getElementById("sPct").textContent = all.length ? Math.round(up / all.length * 100) + "% complete" : "-";
+    document.getElementById("badgeUp").textContent = diff > 0 ? "+" + diff : "-";
+    document.getElementById("badgeTotal").textContent = all.length;
+    document.getElementById("badgePend").textContent = all.length - up;
+    document.getElementById("badgeLga").textContent = lgaCount + "/16";
+    var now = new Date().toLocaleTimeString();
+    document.getElementById("stxt").textContent = "Updated " + now + (added ? " (+" + added + " new)" : "");
+    flash();
+    running = true;
+    applyF();
+  });
 }
-function renderPag(tot){
-  const pages=Math.ceil(tot/RPP);document.getElementById("pagBar").style.display="flex";
-  const s=Math.min((page-1)*RPP+1,tot),e=Math.min(page*RPP,tot);
-  document.getElementById("pinfo").textContent=s+"-"+e+" of "+tot.toLocaleString();
-  const el=document.getElementById("pbtns");el.innerHTML="";
-  const add=(l,pg,dis,act)=>{const b=document.createElement("button");b.className="pbtn"+(act?" active":"");b.textContent=l;b.disabled=dis;b.onclick=()=>{page=pg;renderTable();window.scrollTo(0,0);};el.appendChild(b);};
-  add("<",page-1,page===1,false);
-  getRange(page,pages).forEach(p=>{if(p==="..."){const sp=document.createElement("span");sp.textContent="...";sp.style.cssText="padding:5px 6px;color:var(--text3)";el.appendChild(sp);}else add(p,p,false,p===page);});
-  add(">",page+1,page===pages,false);
+
+function updProg(tot, docs) {
+  var pct = tot ? Math.round(docs / tot * 100) : 0;
+  document.getElementById("progPct").textContent = pct + "%";
+  document.getElementById("progFill").style.width = pct + "%";
+  document.getElementById("progUp").textContent = docs;
+  document.getElementById("progTot").textContent = tot;
 }
-function getRange(c,t){if(t<=7)return Array.from({length:t},(_,i)=>i+1);if(c<=4)return[1,2,3,4,5,"...",t];if(c>=t-3)return[1,"...",t-4,t-3,t-2,t-1,t];return[1,"...",c-1,c,c+1,"...",t];}
-function startCD(){
-  if(cdT)clearInterval(cdT);cd=RSEC;
-  cdT=setInterval(async()=>{
-    cd--;document.getElementById("cdNum").textContent=cd;
-    if(cd<=0){
-      cd=RSEC;
-      try{const r=await fetch("config.json?t="+Date.now());if(r.ok){const cfg=await r.json();const nid=cfg.election_id||"";if(nid&&nid!=="PASTE_HERE_ON_JUNE_20"&&nid!==EID){EID=nid;SID=cfg.state_id||"13";document.getElementById("notLiveBanner").style.display="none";}}}catch(e){}
-      if(EID&&EID!=="PASTE_HERE_ON_JUNE_20")fetchAll().catch(()=>{});
+
+function getImg(pu) { var d = pu.document || {}; return d.url || d.link || pu.document_url || pu.result_url || ""; }
+function getT(pu) { var d = pu.document || {}; var t = d.updated_at || d.created_at || ""; return t ? new Date(t).toLocaleString() : ""; }
+
+function applyF() {
+  var lga = document.getElementById("lgaF").value;
+  var ward = document.getElementById("wardF").value;
+  var stat = document.getElementById("statF").value;
+  var srch = document.getElementById("srch").value.toLowerCase();
+  filtered = all.filter(function(p) {
+    if (lga && p.lga !== lga) return false;
+    if (ward && p.ward !== ward) return false;
+    if (stat === "up" && !p.imgUrl) return false;
+    if (stat === "pend" && p.imgUrl) return false;
+    if (srch && p.name.toLowerCase().indexOf(srch) < 0 && p.code.toLowerCase().indexOf(srch) < 0) return false;
+    return true;
+  });
+  page = 1;
+  renderTable();
+}
+
+function resetF() {
+  ["lgaF","wardF","statF"].forEach(function(id) { document.getElementById(id).value = ""; });
+  document.getElementById("srch").value = "";
+  applyF();
+}
+
+function renderTable() {
+  var wrap = document.getElementById("twrap");
+  var tot = filtered.length;
+  document.getElementById("tcnt").textContent = tot + " polling unit" + (tot !== 1 ? "s" : "");
+  if (!tot) {
+    if (all.length > 0) wrap.innerHTML = "<div class=\"sbox\"><div class=\"stitle\">No results found</div><div class=\"ssub\">Try adjusting your filters.</div></div>";
+    document.getElementById("pagBar").style.display = "none";
+    return;
+  }
+  var s = (page - 1) * RPP;
+  var pg = filtered.slice(s, s + RPP);
+  var h = "<div style=\"overflow-x:auto\"><table><thead><tr><th>#</th><th>LGA</th><th>Ward</th><th>PU Code</th><th>PU Name</th><th>Uploaded At</th><th>Status</th><th>Result</th></tr></thead><tbody>";
+  pg.forEach(function(p, i) {
+    var n = s + i + 1;
+    var has = !!p.imgUrl;
+    var pill = has ? "<span class=\"pill pok\">Uploaded</span>" : "<span class=\"pill pwait\">Pending</span>";
+    var btn = has ? "<button class=\"vbtn\" onclick=\"openM(decodeURIComponent(this.dataset.url),decodeURIComponent(this.dataset.name))\" data-url=\"" + encodeURIComponent(p.imgUrl) + "\" data-name=\"" + encodeURIComponent(p.name) + "\">View</button>" : "<span style=\"color:var(--text3);font-size:12px\">-</span>";
+    h += "<tr><td class=\"td-c\">" + n + "</td><td class=\"td-lga\">" + p.lga + "</td><td class=\"td-w\">" + p.ward + "</td><td class=\"td-c\">" + p.code + "</td><td>" + p.name + "</td><td class=\"td-c\">" + (p.uploadedAt || "-") + "</td><td>" + pill + "</td><td>" + btn + "</td></tr>";
+  });
+  h += "</tbody></table></div>";
+  wrap.innerHTML = h;
+  renderPag(tot);
+}
+
+function renderPag(tot) {
+  var pages = Math.ceil(tot / RPP);
+  document.getElementById("pagBar").style.display = "flex";
+  var s = Math.min((page-1)*RPP+1, tot);
+  var e = Math.min(page*RPP, tot);
+  document.getElementById("pinfo").textContent = s + "-" + e + " of " + tot;
+  var el = document.getElementById("pbtns");
+  el.innerHTML = "";
+  function addBtn(l, pg, dis, act) {
+    var b = document.createElement("button");
+    b.className = "pbtn" + (act ? " active" : "");
+    b.textContent = l; b.disabled = dis;
+    b.onclick = function() { page = pg; renderTable(); window.scrollTo(0,0); };
+    el.appendChild(b);
+  }
+  addBtn("<", page-1, page===1, false);
+  getRange(page, pages).forEach(function(p) {
+    if (p === "...") { var sp = document.createElement("span"); sp.textContent = "..."; sp.style.padding = "5px 6px"; el.appendChild(sp); }
+    else addBtn(p, p, false, p === page);
+  });
+  addBtn(">", page+1, page===pages, false);
+}
+
+function getRange(c, t) {
+  if (t <= 7) { var a = []; for (var i=1;i<=t;i++) a.push(i); return a; }
+  if (c <= 4) return [1,2,3,4,5,"...",t];
+  if (c >= t-3) return [1,"...",t-4,t-3,t-2,t-1,t];
+  return [1,"...",c-1,c,c+1,"...",t];
+}
+
+function june20() {
+  var ms = new Date(2025, 5, 20, 8, 0, 0).getTime() - Date.now();
+  if (ms < 0) ms = 0;
+  var D = Math.floor(ms / 86400000);
+  var H = Math.floor(ms % 86400000 / 3600000);
+  var M = Math.floor(ms % 3600000 / 60000);
+  var S = Math.floor(ms % 60000 / 1000);
+  function p(n) { return n < 10 ? "0" + n : "" + n; }
+  var eD = document.getElementById("K_D");
+  var eH = document.getElementById("K_H");
+  var eM = document.getElementById("K_M");
+  var eS = document.getElementById("K_S");
+  if (eD) eD.textContent = D;
+  if (eH) eH.textContent = p(H);
+  if (eM) eM.textContent = p(M);
+  if (eS) eS.textContent = p(S);
+}
+
+function startCD() {
+  if (cdT) clearInterval(cdT);
+  cd = RSEC;
+  june20();
+  cdT = setInterval(function() {
+    cd--;
+    document.getElementById("cdNum").textContent = cd;
+    june20();
+    if (cd <= 0) {
+      cd = RSEC;
+      fetch("config.json?" + Date.now())
+        .then(function(r) { return r.json(); })
+        .then(function(cfg) {
+          var nid = cfg.election_id || "";
+          if (nid && nid !== "PASTE_HERE_ON_JUNE_20" && nid !== EID) {
+            EID = nid; SID = cfg.state_id || "13";
+            document.getElementById("notLiveBanner").style.display = "none";
+          }
+        })
+        .catch(function() {})
+        .then(function() {
+          if (EID && EID !== "PASTE_HERE_ON_JUNE_20") fetchAll();
+        });
     }
-  },1000);
+  }, 1000);
 }
-function openM(eu,en){
-  const url=decodeURIComponent(eu),name=decodeURIComponent(en);
-  document.getElementById("mtitle").textContent=name;
-  document.getElementById("mbody").innerHTML='<div class="mload"><div class="spin"></div>Loading...</div>';
+
+function openM(url, name) {
+  document.getElementById("mtitle").textContent = name;
+  document.getElementById("mbody").innerHTML = "<div class=\"mload\"><div class=\"spin\"></div>Loading...</div>";
   document.getElementById("mbg").classList.add("open");
-  const img=new Image();
-  img.onload=()=>{document.getElementById("mbody").innerHTML="";img.style.cssText="display:block;max-width:100%;max-height:80vh";document.getElementById("mbody").appendChild(img);};
-  img.onerror=()=>{document.getElementById("mbody").innerHTML='<div class="mload">Could not load.<br><a href="'+url+'" target="_blank" style="color:var(--blue)">Open directly</a></div>';};
-  img.src=url;
+  var img = new Image();
+  img.onload = function() {
+    document.getElementById("mbody").innerHTML = "";
+    img.style.cssText = "display:block;max-width:100%;max-height:80vh";
+    document.getElementById("mbody").appendChild(img);
+  };
+  img.onerror = function() {
+    document.getElementById("mbody").innerHTML = "<div class=\"mload\">Could not load. <a href=\"" + url + "\" target=\"_blank\" style=\"color:var(--blue)\">Open directly</a></div>";
+  };
+  img.src = url;
 }
-function bgck(e){if(e.target===document.getElementById("mbg"))closeM();}
-function closeM(){document.getElementById("mbg").classList.remove("open");document.getElementById("mbody").innerHTML="";}
-function flash(){const d=document.getElementById("sdot");d.style.opacity="1";setTimeout(()=>d.style.opacity="0",2500);}
-function exportCSV(){
-  if(!filtered.length){toast("No data");return;}
-  const h=["LGA","Ward","PU Code","PU Name","Status","Uploaded At","Image URL"];
-  const rows=filtered.map(p=>[p.lga,p.ward,p.code,'"'+ p.name+'"',p.imgUrl?"Uploaded":"Pending",p.uploadedAt,p.imgUrl]);
-  const csv=[h,...rows].map(r=>r.join(",")).join("
-");
-  const a=document.createElement("a");a.href="data:text/csv;charset=utf-8,"+encodeURIComponent(csv);a.download="ekiti_results_"+new Date().toISOString().slice(0,10)+".csv";a.click();toast("CSV exported!");
+
+function bgck(e) { if (e.target === document.getElementById("mbg")) closeM(); }
+function closeM() { document.getElementById("mbg").classList.remove("open"); document.getElementById("mbody").innerHTML = ""; }
+function flash() { var d = document.getElementById("sdot"); d.style.opacity = "1"; setTimeout(function() { d.style.opacity = "0"; }, 2500); }
+
+function exportCSV() {
+  if (!filtered.length) { showToast("No data to export"); return; }
+  var h = ["LGA","Ward","PU Code","PU Name","Status","Uploaded At","Image URL"];
+  var rows = filtered.map(function(p) { return [p.lga, p.ward, p.code, p.name, p.imgUrl ? "Uploaded" : "Pending", p.uploadedAt, p.imgUrl]; });
+  var csv = [h].concat(rows).map(function(r) { return r.join(","); }).join("\n");
+  var a = document.createElement("a");
+  a.href = "data:text/csv;charset=utf-8," + encodeURIComponent(csv);
+  a.download = "ekiti_results.csv";
+  a.click();
+  showToast("CSV exported!");
 }
-function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),3500);}
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeM();});
+
+function showToast(msg) {
+  var t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(function() { t.classList.remove("show"); }, 3500);
+}
+
+document.addEventListener("keydown", function(e) { if (e.key === "Escape") closeM(); });
+
+// Start
 loadConfig();
 </script>
 
 
-<script>
-var JUNE20 = new Date(2025, 5, 20, 8, 0, 0).getTime();
-
-function updateCountdown() {
-  var now  = new Date().getTime();
-  var diff = JUNE20 - now;
-  if (diff < 0) diff = 0;
-
-  var days  = Math.floor(diff / 86400000);
-  var hours = Math.floor((diff % 86400000) / 3600000);
-  var mins  = Math.floor((diff % 3600000) / 60000);
-  var secs  = Math.floor((diff % 60000) / 1000);
-
-  function pad(n) { return n < 10 ? "0" + n : String(n); }
-
-  document.getElementById("cdDays").textContent  = days;
-  document.getElementById("cdHours").textContent = pad(hours);
-  document.getElementById("cdMins").textContent  = pad(mins);
-  document.getElementById("cdSecs").textContent  = pad(secs);
-}
-
-updateCountdown();
-setInterval(updateCountdown, 1000);
-</script>
 </body>
 </html>
