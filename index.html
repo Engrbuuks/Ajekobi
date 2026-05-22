@@ -298,8 +298,8 @@ tbody tr:hover td{background:#f7fbf8;}
     <div id="twrap">
       <div class="sbox">
         <div class="sicon">&#128393;</div>
-        <div class="stitle">Ready for June 20th</div>
-        <div class="ssub">On election day morning, paste the Ekiti Election ID above and click Connect.<br><br>Results from all polling units will appear here automatically every 90 seconds as officers upload them to IReV.</div>
+        <div class="stitle">PU results will appear here</div>
+        <div class="ssub"><br><br>We can't wait to see the first result drop</div>
       </div>
     </div>
     <div class="pag" id="pagBar" style="display:none">
@@ -354,7 +354,7 @@ function init(){
 
 function showNotLive(){
   document.getElementById("stxt").textContent="Waiting for election to go live";
-  document.getElementById("twrap").innerHTML='<div class="sbox"><div class="stitle" style="font-size:18px;margin-bottom:10px;">PU results will appear here</div><div class="ssub" style="font-size:15px;color:var(--green);font-weight:600;">We can't wait to see the first result drop</div></div>';
+  document.getElementById("twrap").innerHTML='<div class="sbox"><div class="stitle" style="font-size:20px;margin-bottom:12px;">PU results will appear here</div><div class="ssub" style="font-size:15px;color:var(--green);font-weight:600;">We can't wait to see the first result drop</div></div>';
 }
 
 async function apiGet(p){
@@ -491,18 +491,17 @@ function exportCSV(){
 }
 function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),3500);}
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeM();});
-// Countdown — runs completely independently
-window.addEventListener("DOMContentLoaded",function(){
+// Countdown — called directly (DOM already loaded at bottom of body)
+(function(){
   var target=new Date("June 20, 2025 08:00:00").getTime();
+  function pad(n){return n<10?"0"+n:String(n);}
   function tick(){
-    var now=new Date().getTime();
-    var diff=target-now;
-    if(diff<0){diff=0;}
-    var d=Math.floor(diff/(1000*60*60*24));
-    var h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-    var m=Math.floor((diff%(1000*60*60))/(1000*60));
-    var s=Math.floor((diff%(1000*60))/1000);
-    function pad(n){return n<10?"0"+n:String(n);}
+    var diff=target-Date.now();
+    if(diff<0)diff=0;
+    var d=Math.floor(diff/864e5);
+    var h=Math.floor((diff%864e5)/36e5);
+    var m=Math.floor((diff%36e5)/6e4);
+    var s=Math.floor((diff%6e4)/1e3);
     var eD=document.getElementById("cdDays");
     var eH=document.getElementById("cdHours");
     var eM=document.getElementById("cdMins");
@@ -514,9 +513,8 @@ window.addEventListener("DOMContentLoaded",function(){
   }
   tick();
   setInterval(tick,1000);
-  // Load config after DOM ready
-  loadConfig();
-});
+})();
+loadConfig();
 </script>
 </body>
 </html>
