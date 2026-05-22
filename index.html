@@ -354,7 +354,7 @@ function init(){
 
 function showNotLive(){
   document.getElementById("stxt").textContent="Waiting for election to go live";
-  document.getElementById("twrap").innerHTML='<div class="sbox"><div class="sicon">&#128393;</div><div class="stitle">Results not yet available</div><div class="ssub">INEC has not yet opened the Ekiti election on IReV. This page will automatically load results on <strong>June 20, 2025</strong>.</div></div>';
+  document.getElementById("twrap").innerHTML='<div class="sbox"><div class="stitle" style="font-size:18px;margin-bottom:10px;">PU results will appear here</div><div class="ssub" style="font-size:15px;color:var(--green);font-weight:600;">We can't wait to see the first result drop</div></div>';
 }
 
 async function apiGet(p){
@@ -491,32 +491,32 @@ function exportCSV(){
 }
 function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),3500);}
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeM();});
-// Election day countdown
-function runCountdown(){
-  const target=new Date("2025-06-20T08:00:00");
+// Countdown — runs completely independently
+window.addEventListener("DOMContentLoaded",function(){
+  var target=new Date("June 20, 2025 08:00:00").getTime();
   function tick(){
-    const now=new Date(),diff=target-now;
-    if(diff<=0){
-      const b=document.getElementById("notLiveBanner");
-      if(b)b.style.display="none";
-      return;
-    }
-    const d=Math.floor(diff/864e5);
-    const h=Math.floor((diff%864e5)/36e5);
-    const m=Math.floor((diff%36e5)/6e4);
-    const s=Math.floor((diff%6e4)/1e3);
-    const pad=n=>String(n).padStart(2,"0");
-    const el=id=>document.getElementById(id);
-    if(el("cdDays"))el("cdDays").textContent=d;
-    if(el("cdHours"))el("cdHours").textContent=pad(h);
-    if(el("cdMins"))el("cdMins").textContent=pad(m);
-    if(el("cdSecs"))el("cdSecs").textContent=pad(s);
+    var now=new Date().getTime();
+    var diff=target-now;
+    if(diff<0){diff=0;}
+    var d=Math.floor(diff/(1000*60*60*24));
+    var h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+    var m=Math.floor((diff%(1000*60*60))/(1000*60));
+    var s=Math.floor((diff%(1000*60))/1000);
+    function pad(n){return n<10?"0"+n:String(n);}
+    var eD=document.getElementById("cdDays");
+    var eH=document.getElementById("cdHours");
+    var eM=document.getElementById("cdMins");
+    var eS=document.getElementById("cdSecs");
+    if(eD)eD.textContent=d;
+    if(eH)eH.textContent=pad(h);
+    if(eM)eM.textContent=pad(m);
+    if(eS)eS.textContent=pad(s);
   }
   tick();
   setInterval(tick,1000);
-}
-runCountdown();
-loadConfig();
+  // Load config after DOM ready
+  loadConfig();
+});
 </script>
 </body>
 </html>
