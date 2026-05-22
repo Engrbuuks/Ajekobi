@@ -224,7 +224,29 @@ tbody tr:hover td{background:#f7fbf8;}
         <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.07em;margin-top:4px;">Seconds</div>
       </div>
     </div>
-  </div>
+  <script>
+  // Inline countdown — runs immediately when this HTML is parsed
+  !function(){
+    var T=new Date(2025,5,20,8,0,0).getTime();
+    function p(n){return(n<10?"0":"")+n;}
+    function go(){
+      var ms=T-Date.now();if(ms<0)ms=0;
+      var D=Math.floor(ms/864e5);
+      var H=Math.floor(ms%864e5/36e5);
+      var M=Math.floor(ms%36e5/6e4);
+      var S=Math.floor(ms%6e4/1e3);
+      var a=document.getElementById("cdDays");
+      var b=document.getElementById("cdHours");
+      var c=document.getElementById("cdMins");
+      var d=document.getElementById("cdSecs");
+      if(a)a.textContent=D;
+      if(b)b.textContent=p(H);
+      if(c)c.textContent=p(M);
+      if(d)d.textContent=p(S);
+    }
+    go();setInterval(go,1000);
+  }();
+  </script>
 
   <div class="stats-grid">
     <div class="sc g">
@@ -494,32 +516,5 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")closeM();});
 loadConfig();
 </script>
 
-<script>
-// Standalone countdown — completely independent
-(function(){
-  // June 20 2025 08:00 AM
-  var target = new Date(2025, 5, 20, 8, 0, 0).getTime();
-  function pad(n){ return n < 10 ? "0" + n : "" + n; }
-  function tick(){
-    var now  = new Date().getTime();
-    var diff = target - now;
-    if(diff < 0) diff = 0;
-    var days  = Math.floor(diff / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var mins  = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    var secs  = Math.floor((diff % (1000 * 60)) / 1000);
-    var eD = document.getElementById("cdDays");
-    var eH = document.getElementById("cdHours");
-    var eM = document.getElementById("cdMins");
-    var eS = document.getElementById("cdSecs");
-    if(eD) eD.textContent = days;
-    if(eH) eH.textContent = pad(hours);
-    if(eM) eM.textContent = pad(mins);
-    if(eS) eS.textContent = pad(secs);
-  }
-  tick();
-  setInterval(tick, 1000);
-})();
-</script>
 </body>
 </html>
