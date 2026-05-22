@@ -224,30 +224,6 @@ tbody tr:hover td{background:#f7fbf8;}
         <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.07em;margin-top:4px;">Seconds</div>
       </div>
     </div>
-  <script>
-  // Inline countdown — runs immediately when this HTML is parsed
-  !function(){
-    var T=new Date(2025,5,20,8,0,0).getTime();
-    function p(n){return(n<10?"0":"")+n;}
-    function go(){
-      var ms=T-Date.now();if(ms<0)ms=0;
-      var D=Math.floor(ms/864e5);
-      var H=Math.floor(ms%864e5/36e5);
-      var M=Math.floor(ms%36e5/6e4);
-      var S=Math.floor(ms%6e4/1e3);
-      var a=document.getElementById("cdDays");
-      var b=document.getElementById("cdHours");
-      var c=document.getElementById("cdMins");
-      var d=document.getElementById("cdSecs");
-      if(a)a.textContent=D;
-      if(b)b.textContent=p(H);
-      if(c)c.textContent=p(M);
-      if(d)d.textContent=p(S);
-    }
-    go();setInterval(go,1000);
-  }();
-  </script>
-
   <div class="stats-grid">
     <div class="sc g">
       <div class="sc-top"><div class="sc-icon g">&#127963;&#65039;</div><span class="sc-badge n" id="badgeTotal">Ekiti</span></div>
@@ -516,5 +492,30 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")closeM();});
 loadConfig();
 </script>
 
+
+<script>
+var JUNE20 = new Date(2025, 5, 20, 8, 0, 0).getTime();
+
+function updateCountdown() {
+  var now  = new Date().getTime();
+  var diff = JUNE20 - now;
+  if (diff < 0) diff = 0;
+
+  var days  = Math.floor(diff / 86400000);
+  var hours = Math.floor((diff % 86400000) / 3600000);
+  var mins  = Math.floor((diff % 3600000) / 60000);
+  var secs  = Math.floor((diff % 60000) / 1000);
+
+  function pad(n) { return n < 10 ? "0" + n : String(n); }
+
+  document.getElementById("cdDays").textContent  = days;
+  document.getElementById("cdHours").textContent = pad(hours);
+  document.getElementById("cdMins").textContent  = pad(mins);
+  document.getElementById("cdSecs").textContent  = pad(secs);
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
 </body>
 </html>
