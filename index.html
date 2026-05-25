@@ -633,6 +633,9 @@ function startCD() {
           if (nid && nid !== 'PASTE_HERE_ON_JUNE_20' && nid !== EID) {
             EID = nid; SID = cfg.state_id || '13';
             document.getElementById('bannerEl').style.display = 'none';
+          } else if (!nid || nid === 'PASTE_HERE_ON_JUNE_20') {
+            EID = '';
+            document.getElementById('bannerEl').style.display = 'block';
           }
         })
         .catch(function() {});
