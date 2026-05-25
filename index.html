@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BRAVO - Ekiti 2026 Live Results</title>
+<title>IQRS - Ekiti 2026 Live Results</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -333,6 +333,7 @@ function loadConfig() {
 
 function init() {
   if (!EID || EID === 'PASTE_HERE_ON_JUNE_20') {
+    document.getElementById('bannerEl').style.display = 'block';
     document.getElementById('stxt').textContent = 'Waiting for election to go live';
     document.getElementById('tcon').innerHTML = '<div class="sbox"><div class="stitle">PU results will appear here</div><div class="ssub">Results load automatically on June 20, 2026 once INEC opens the election on IReV.</div></div>';
     startCD();
