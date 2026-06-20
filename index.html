@@ -34,8 +34,8 @@ body{font-family:"Plus Jakarta Sans",sans-serif;background:var(--bg);color:var(-
 .livechip{display:flex;align-items:center;gap:7px;background:var(--green);color:#fff;border-radius:99px;padding:6px 14px;font-size:12px;font-weight:700;}
 .ldot{width:7px;height:7px;background:#fff;border-radius:50%;animation:pulse 1.5s ease-in-out infinite;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.75)}}
-.rfchip{display:none;align-items:center;gap:6px;background:var(--s2);border:1px solid var(--border);border-radius:99px;padding:6px 12px;font-size:12px;color:var(--t2);font-family:"JetBrains Mono",monospace;}
-.rfnum{color:var(--green);font-weight:700;min-width:22px;text-align:center;}
+
+
 
 /* MAIN */
 .main{max-width:1300px;margin:0 auto;padding:16px 12px 48px;}
@@ -166,12 +166,15 @@ tbody tr.rdone td{background:#faf5ff;}
 .toast.show{opacity:1;transform:translateY(0);}
 .footer{text-align:center;padding:16px;font-size:11px;color:var(--t3);font-family:"JetBrains Mono",monospace;border-top:1px solid var(--border);background:var(--white);margin-top:24px;}
 
+.rfchip{display:none;align-items:center;gap:6px;background:var(--s2);border:1px solid var(--border);border-radius:99px;padding:6px 12px;font-size:12px;color:var(--t2);font-family:"JetBrains Mono",monospace;}
+.rfnum{color:var(--green);font-weight:700;min-width:22px;text-align:center;}
 @media(min-width:600px){
   .main{padding:20px 16px 40px;}
+  .rfchip{display:flex;}
   .fbar{grid-template-columns:repeat(3,1fr);}
   .fg.act{grid-column:auto;justify-content:flex-start;align-items:flex-end;}
   .grid4{grid-template-columns:repeat(4,1fr);}
-  .rfchip{display:flex;}
+  
   .toast{left:auto;right:24px;bottom:24px;text-align:left;max-width:360px;}
 }
 @media(min-width:900px){
@@ -255,25 +258,12 @@ tbody tr.rdone td{background:#faf5ff;}
     <div class="edate">Election Day - June 20, 2026</div>
   </div>
   <div class="hright">
-    <div class="rfchip">Next refresh in <span class="rfnum" id="rfnum">90</span>s</div>
+    <div class="rfchip">Refreshing in <span class="rfnum" id="rfnum">90</span>s</div>
     <div class="livechip"><span class="ldot"></span> LIVE</div>
   </div>
 </header>
 
 <div class="main">
-
-  <!-- BANNER + COUNTDOWN -->
-  <div class="banner" id="bannerEl">
-    <div class="ban-label">Ekiti Elections 2026</div>
-    <div class="ban-title">Results not yet available</div>
-    <div class="ban-sub">We are counting down to June 20th 2026 - We cannot wait too!</div>
-    <div class="ctiles">
-      <div class="ctile"><div class="cnum" id="cdD">--</div><div class="clbl">Days</div></div>
-      <div class="ctile"><div class="cnum" id="cdH">--</div><div class="clbl">Hours</div></div>
-      <div class="ctile"><div class="cnum" id="cdM">--</div><div class="clbl">Minutes</div></div>
-      <div class="ctile"><div class="cnum" id="cdS">--</div><div class="clbl">Seconds</div></div>
-    </div>
-  </div>
 
   <!-- STATS -->
   <div class="grid4">
@@ -366,27 +356,6 @@ var curCode = '';
 var EID = '', SID = '13';
 var cd = RSEC, cdT = null, running = false;
 
-// ── ELECTION DAY COUNTDOWN ───────────────────────────────
-var JUNE20 = new Date(2026, 5, 20, 8, 0, 0).getTime();
-function tickCountdown() {
-  var ms = JUNE20 - Date.now();
-  if (ms < 0) ms = 0;
-  var D = Math.floor(ms / 86400000);
-  var H = Math.floor(ms % 86400000 / 3600000);
-  var M = Math.floor(ms % 3600000 / 60000);
-  var S = Math.floor(ms % 60000 / 1000);
-  function p(n) { return n < 10 ? '0' + n : '' + n; }
-  var eD = document.getElementById('cdD');
-  var eH = document.getElementById('cdH');
-  var eM = document.getElementById('cdM');
-  var eS = document.getElementById('cdS');
-  if (eD) eD.textContent = D;
-  if (eH) eH.textContent = p(H);
-  if (eM) eM.textContent = p(M);
-  if (eS) eS.textContent = p(S);
-}
-tickCountdown();
-setInterval(tickCountdown, 1000);
 
 // ── LOAD CONFIG ──────────────────────────────────────────
 function loadConfig() {
@@ -402,7 +371,6 @@ function loadConfig() {
 
 function init() {
   if (!EID || EID === 'PASTE_HERE_ON_JUNE_20') {
-    document.getElementById('bannerEl').style.display = 'block';
     document.getElementById('stxt').textContent = 'Waiting for election to go live';
     document.getElementById('tcon').innerHTML = '<div class="sbox"><div class="stitle">PU results will appear here</div><div class="ssub">Results load automatically on June 20, 2026 once INEC opens the election on IReV.</div></div>';
     startCD();
@@ -867,8 +835,8 @@ function startCD() {
   cd = RSEC;
   cdT = setInterval(function() {
     cd--;
-    var el = document.getElementById('rfnum');
-    if (el) el.textContent = cd;
+    var rn = document.getElementById('rfnum');
+    if (rn) rn.textContent = cd;
     if (cd <= 0) {
       cd = RSEC;
       fetch('config.json?' + Date.now())
@@ -877,11 +845,9 @@ function startCD() {
           var nid = cfg.election_id || '';
           if (nid && nid !== 'PASTE_HERE_ON_JUNE_20' && nid !== EID) {
             EID = nid; SID = cfg.state_id || '13';
-            document.getElementById('bannerEl').style.display = 'none';
-          } else if (!nid || nid === 'PASTE_HERE_ON_JUNE_20') {
+                  } else if (!nid || nid === 'PASTE_HERE_ON_JUNE_20') {
             EID = '';
-            document.getElementById('bannerEl').style.display = 'block';
-          }
+                  }
         })
         .catch(function() {});
       if (EID && EID !== 'PASTE_HERE_ON_JUNE_20') {
