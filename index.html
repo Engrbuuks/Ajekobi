@@ -538,31 +538,62 @@ function renderLgaCards() {
     var done = lga.pus.filter(function(p) { return !!doneMap[p.code]; }).length;
     var pct  = tot ? Math.round(up / tot * 100) : 0;
     var bc   = pct >= 80 ? 'background:var(--gl);color:var(--g)' : pct >= 40 ? 'background:var(--al);color:var(--am)' : 'background:#fee2e2;color:#dc2626';
-    var wardRows = '';
+
+    // Build ward rows
+    var wardDiv = document.createElement('div');
+    wardDiv.className = 'lgac-body';
     Object.values(lga.wards).sort(function(a,b){return a.name.localeCompare(b.name);}).forEach(function(w) {
-      var wt = w.pus.length, wu = w.pus.filter(function(p){return !!p.imgUrl;}).length, wd = w.pus.filter(function(p){return !!doneMap[p.code];}).length;
+      var wt = w.pus.length;
+      var wu = w.pus.filter(function(p){return !!p.imgUrl;}).length;
+      var wd = w.pus.filter(function(p){return !!doneMap[p.code];}).length;
       var wp = wt ? Math.round(wu/wt*100) : 0;
-      var wc = wp===100?'background:var(--gl);color:var(--g)':wp>0?'background:var(--al);color:var(--am)':'background:var(--s2);color:var(--t3)';
-      wardRows += '<div class="ward-row"><span class="ward-name">' + w.name + '</span><span class="ward-pill" style="' + wc + '">' + wu + '/' + wt + '</span>' + (wd>0?'<span class="ward-pill" style="background:var(--pl);color:var(--pu);margin-left:4px">' + wd + ' done</span>':'') + '</div>';
+      var wc = wp===100 ? 'background:var(--gl);color:var(--g)' : wp>0 ? 'background:var(--al);color:var(--am)' : 'background:var(--s2);color:var(--t3)';
+      var row = document.createElement('div');
+      row.className = 'ward-row';
+      row.innerHTML = '<span class="ward-name">' + w.name + '</span>'
+        + '<span class="ward-pill" style="' + wc + '">' + wu + '/' + wt + '</span>'
+        + (wd > 0 ? '<span class="ward-pill" style="background:var(--pl);color:var(--pu);margin-left:4px">' + wd + ' done</span>' : '');
+      wardDiv.appendChild(row);
     });
-    var cid = 'lc_' + lga.name.replace(/\s+/g,'_');
+
+    // Build card using DOM — no inline onclick strings
     var card = document.createElement('div');
     card.className = 'lgac';
-    card.innerHTML = '<div class="lgac-h" onclick="toggleLga('' + cid + '')">'
-      + '<div><div class="lgac-name">' + lga.name + '</div><div class="lgac-counts">' + up + '/' + tot + ' uploaded' + (done>0?' &bull; '+done+' done':'') + '</div></div>'
-      + '<div style="display:flex;align-items:center"><span class="lgac-pct" style="' + bc + '">' + pct + '%</span><span class="lgac-arr" id="arr_' + cid + '">&#9660;</span></div>'
-      + '</div>'
-      + '<div class="lgac-bar"><div class="lgac-fill" style="width:' + pct + '%"></div></div>'
-      + '<div class="lgac-body" id="body_' + cid + '">' + wardRows + '</div>';
+
+    var hdr = document.createElement('div');
+    hdr.className = 'lgac-h';
+
+    var info = document.createElement('div');
+    var nameDiv = document.createElement('div'); nameDiv.className = 'lgac-name'; nameDiv.textContent = lga.name;
+    var cntDiv  = document.createElement('div'); cntDiv.className  = 'lgac-counts';
+    cntDiv.textContent = up + '/' + tot + ' uploaded' + (done > 0 ? ' • ' + done + ' done' : '');
+    info.appendChild(nameDiv); info.appendChild(cntDiv);
+
+    var right = document.createElement('div'); right.style.cssText = 'display:flex;align-items:center';
+    var badge = document.createElement('span'); badge.className = 'lgac-pct'; badge.setAttribute('style', bc); badge.textContent = pct + '%';
+    var arr   = document.createElement('span'); arr.className = 'lgac-arr'; arr.innerHTML = '&#9660;';
+
+    right.appendChild(badge); right.appendChild(arr);
+    hdr.appendChild(info); hdr.appendChild(right);
+
+    var bar  = document.createElement('div'); bar.className = 'lgac-bar';
+    var fill = document.createElement('div'); fill.className = 'lgac-fill'; fill.style.width = pct + '%';
+    bar.appendChild(fill);
+
+    card.appendChild(hdr);
+    card.appendChild(bar);
+    card.appendChild(wardDiv);
+
+    // Toggle using closure — no inline onclick
+    hdr.onclick = function() {
+      wardDiv.classList.toggle('open');
+      arr.classList.toggle('open');
+    };
+
     grid.appendChild(card);
   });
 }
 
-function toggleLga(cid) {
-  var b = document.getElementById('body_' + cid);
-  var a = document.getElementById('arr_' + cid);
-  if (b) { b.classList.toggle('open'); if(a) a.classList.toggle('open'); }
-}
 
 // ── 10. TABLE ─────────────────────────────────────────────
 function renderTable() {
