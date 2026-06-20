@@ -181,6 +181,62 @@ tbody tr.rdone td{background:#faf5ff;}
   .fbar{grid-template-columns:repeat(5,1fr) auto;}
   .fg.act{grid-column:auto;}
 }
+
+/* ── LGA CARDS ── */
+.lga-section{margin-bottom:16px;}
+.lga-section-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.lga-section-title::before{content:"";display:block;width:4px;height:16px;background:var(--green);border-radius:2px;}
+.lga-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.lga-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:box-shadow 0.2s;}
+.lga-card:hover{box-shadow:var(--shadow-md,0 4px 20px rgba(0,0,0,0.08));}
+.lga-card-head{padding:12px 14px;display:flex;justify-content:space-between;align-items:center;}
+.lga-card-name{font-size:12px;font-weight:700;color:var(--text);flex:1;margin-right:8px;}
+.lga-card-counts{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.lga-uploaded{font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:700;color:var(--green);}
+.lga-total{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--t3);}
+.lga-bar-wrap{height:4px;background:var(--s2);margin:0 14px 10px;}
+.lga-bar{height:4px;background:var(--green);border-radius:2px;transition:width 0.8s ease;}
+.lga-toggle{font-size:11px;color:var(--t3);padding:0 14px 10px;display:flex;align-items:center;gap:4px;}
+.lga-toggle svg{transition:transform 0.2s;}
+.lga-card.open .lga-toggle svg{transform:rotate(180deg);}
+.lga-wards{display:none;border-top:1px solid var(--border);padding:10px 14px;background:var(--s2);}
+.lga-card.open .lga-wards{display:block;}
+.ward-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.ward-row:last-child{border-bottom:none;}
+.ward-name{color:var(--t2);flex:1;}
+.ward-stat{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:600;}
+.ward-stat.full{color:var(--green);}
+.ward-stat.part{color:var(--amber);}
+.ward-stat.none{color:var(--t3);}
+@media(min-width:600px){.lga-grid{grid-template-columns:repeat(4,1fr);}}
+@media(min-width:900px){.lga-grid{grid-template-columns:repeat(4,1fr);}}
+
+/* LGA CARDS */
+.lga-section{margin-bottom:16px;}
+.lga-section-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.lga-section-title::before{content:"";display:block;width:4px;height:16px;background:var(--green);border-radius:2px;}
+.lga-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.lga-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:box-shadow 0.2s;}
+.lga-card:hover{box-shadow:var(--shadow-md,0 4px 24px rgba(0,0,0,0.08));}
+.lga-card-header{padding:12px 14px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none;}
+.lga-card-header:hover{background:var(--s2);}
+.lga-card-left{}
+.lga-card-name{font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.lga-card-counts{font-size:11px;color:var(--t3);font-family:"JetBrains Mono",monospace;}
+.lga-card-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.lga-pct-badge{font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px;font-family:"JetBrains Mono",monospace;}
+.lga-toggle{font-size:12px;color:var(--t3);transition:transform 0.2s;display:inline-block;}
+.lga-toggle.open{transform:rotate(180deg);}
+.lga-mini-bar{height:4px;background:var(--s2);}
+.lga-mini-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--gm));transition:width 0.8s ease;}
+.lga-body{display:none;border-top:1px solid var(--border);padding:10px 14px;}
+.lga-body.open{display:block;}
+.ward-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--border);font-size:12px;}
+.ward-row:last-child{border-bottom:none;}
+.ward-name{color:var(--t2);flex:1;}
+.ward-pill{font-size:10px;font-weight:600;padding:2px 7px;border-radius:99px;white-space:nowrap;}
+@media(min-width:600px){.lga-grid{grid-template-columns:repeat(3,1fr);}}
+@media(min-width:900px){.lga-grid{grid-template-columns:repeat(4,1fr);}}
 </style>
 </head>
 <body>
@@ -239,6 +295,19 @@ tbody tr.rdone td{background:#faf5ff;}
     <div class="li"><span class="pill pok">&#10003; Uploaded</span> Result image available</div>
     <div class="li"><span class="pill pwait">&#9203; Pending</span> No image yet</div>
     <div class="li"><span class="pill pdone">&#10003; Done</span> Aggregated - skip this one</div>
+  </div>
+
+  <!-- LGA CARDS -->
+  <div class="lga-section" id="lgaCardsSection" style="display:none">
+    <div class="lga-section-title">Results uploaded per LGA</div>
+    <div class="lga-grid" id="lgaGrid"></div>
+  </div>
+
+
+  <!-- LGA CARDS -->
+  <div class="lga-section" id="lgaCardsSection" style="display:none">
+    <div class="lga-section-title">Results by LGA</div>
+    <div class="lga-grid" id="lgaGrid"></div>
   </div>
 
   <!-- FILTERS -->
@@ -348,7 +417,7 @@ function init() {
 function loadDone() {
   fetch(WEBAPP + '?t=' + Date.now(), { redirect: 'follow' })
     .then(function(r) { return r.json(); })
-    .then(function(j) { doneMap = j.done || {}; updateStats(); renderTable(); })
+    .then(function(j) { doneMap = j.done || {}; updateStats(); renderLgaCards(); renderTable(); })
     .catch(function() {});
 }
 
@@ -426,8 +495,10 @@ function fetchAll() {
       var now = new Date().toLocaleTimeString();
       document.getElementById('stxt').textContent = 'Updated ' + now;
       flash();
+      renderLgaCards();
       loadDone();
-      setInterval(loadDone, 90000);
+      setInterval(function(){ loadDone(); renderLgaCards(); }, 90000);
+      renderLgaCards();
       doFilter();
       showToast('Loaded ' + all.length.toLocaleString() + ' polling units');
     })
@@ -540,6 +611,77 @@ function setIRevStats(tot, docs) {
   document.getElementById('sUpPct').textContent= tot ? Math.round(docs/tot*100) + '% uploaded' : '';
 }
 
+function renderLgaCards() {
+  if (!all.length) return;
+  document.getElementById('lgaCardsSection').style.display = 'block';
+  var grid = document.getElementById('lgaGrid');
+
+  // Group by LGA
+  var lgaData = {};
+  all.forEach(function(p) {
+    if (!lgaData[p.lgaDid]) {
+      lgaData[p.lgaDid] = { name: p.lga, total: 0, uploaded: 0, wards: {} };
+    }
+    lgaData[p.lgaDid].total++;
+    if (p.imgUrl) lgaData[p.lgaDid].uploaded++;
+    if (!lgaData[p.lgaDid].wards[p.wardId]) {
+      lgaData[p.lgaDid].wards[p.wardId] = { name: p.ward, total: 0, uploaded: 0 };
+    }
+    lgaData[p.lgaDid].wards[p.wardId].total++;
+    if (p.imgUrl) lgaData[p.lgaDid].wards[p.wardId].uploaded++;
+  });
+
+  // Sort by name
+  var sorted = Object.keys(lgaData).sort(function(a,b) {
+    return lgaData[a].name.localeCompare(lgaData[b].name);
+  });
+
+  grid.innerHTML = '';
+  sorted.forEach(function(did) {
+    var d   = lgaData[did];
+    var pct = d.total ? Math.round(d.uploaded / d.total * 100) : 0;
+
+    var card = document.createElement('div');
+    card.className = 'lga-card';
+    card.setAttribute('data-did', did);
+
+    // Ward rows
+    var wardHtml = '';
+    Object.values(d.wards).sort(function(a,b){return a.name.localeCompare(b.name);}).forEach(function(w) {
+      var cls = w.uploaded === w.total ? 'full' : w.uploaded > 0 ? 'part' : 'none';
+      wardHtml += '<div class="ward-row"><span class="ward-name">' + w.name + '</span><span class="ward-stat ' + cls + '">' + w.uploaded + '/' + w.total + '</span></div>';
+    });
+
+    card.innerHTML =
+      '<div class="lga-card-head">' +
+        '<span class="lga-card-name">' + d.name + '</span>' +
+        '<div class="lga-card-counts">' +
+          '<span class="lga-uploaded">' + d.uploaded + '</span>' +
+          '<span class="lga-total">/' + d.total + '</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="lga-bar-wrap"><div class="lga-bar" style="width:' + pct + '%"></div></div>' +
+      '<div class="lga-toggle">' +
+        '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>' +
+        '<span>' + pct + '% uploaded</span>' +
+      '</div>' +
+      '<div class="lga-wards">' + wardHtml + '</div>';
+
+    card.querySelector('.lga-toggle').addEventListener('click', function(e) {
+      e.stopPropagation();
+      card.classList.toggle('open');
+    });
+    card.querySelector('.lga-card-head').addEventListener('click', function() {
+      // Filter table by this LGA
+      document.getElementById('lgaF').value = did;
+      onLga();
+      document.querySelector('.fbar').scrollIntoView({behavior:'smooth'});
+    });
+
+    grid.appendChild(card);
+  });
+}
+
 function updateStats() {
   var tot  = filtered.length;
   var up   = filtered.filter(function(p) { return !!p.imgUrl; }).length;
@@ -556,6 +698,99 @@ function updateStats() {
   document.getElementById('pfill').style.width  = pct + '%';
   document.getElementById('pdone').textContent  = done.toLocaleString();
   document.getElementById('ptot').textContent   = tot.toLocaleString() + (isF ? ' matching' : ' total');
+}
+
+
+// ── LGA CARDS ─────────────────────────────────────────────
+function renderLgaCards() {
+  if (!all.length) return;
+
+  document.getElementById('lgaCardsSection').style.display = 'block';
+  var grid = document.getElementById('lgaGrid');
+
+  // Group PUs by LGA
+  var lgaMap = {};
+  all.forEach(function(p) {
+    if (!lgaMap[p.lgaDid]) {
+      lgaMap[p.lgaDid] = {
+        name: p.lga,
+        did: p.lgaDid,
+        pus: [],
+        wards: {}
+      };
+    }
+    lgaMap[p.lgaDid].pus.push(p);
+    if (!lgaMap[p.lgaDid].wards[p.wardId]) {
+      lgaMap[p.lgaDid].wards[p.wardId] = { name: p.ward, pus: [] };
+    }
+    lgaMap[p.lgaDid].wards[p.wardId].pus.push(p);
+  });
+
+  var lgaList = Object.values(lgaMap).sort(function(a,b) { return a.name.localeCompare(b.name); });
+
+  grid.innerHTML = '';
+  lgaList.forEach(function(lga) {
+    var total    = lga.pus.length;
+    var uploaded = lga.pus.filter(function(p) { return !!p.imgUrl; }).length;
+    var done     = lga.pus.filter(function(p) { return !!doneMap[p.code]; }).length;
+    var pct      = total ? Math.round(uploaded / total * 100) : 0;
+
+    // Color badge based on upload %
+    var badgeColor = pct >= 80 ? 'background:var(--gl);color:var(--green)'
+                   : pct >= 40 ? 'background:var(--al);color:var(--amber)'
+                   : 'background:#fee2e2;color:#dc2626';
+
+    // Ward rows
+    var wardRows = '';
+    Object.values(lga.wards).sort(function(a,b){return a.name.localeCompare(b.name);}).forEach(function(w) {
+      var wTotal    = w.pus.length;
+      var wUploaded = w.pus.filter(function(p) { return !!p.imgUrl; }).length;
+      var wDone     = w.pus.filter(function(p) { return !!doneMap[p.code]; }).length;
+      var wPct      = wTotal ? Math.round(wUploaded / wTotal * 100) : 0;
+      var wColor    = wPct === 100 ? 'background:var(--gl);color:var(--green)'
+                    : wPct > 0    ? 'background:var(--al);color:var(--amber)'
+                    : 'background:var(--s2);color:var(--t3)';
+      wardRows += '<div class="ward-row">'
+        + '<span class="ward-name">' + w.name + '</span>'
+        + '<span class="ward-pill" style="' + wColor + '">' + wUploaded + '/' + wTotal + '</span>'
+        + (wDone > 0 ? '<span class="ward-pill" style="background:var(--dl);color:var(--done);margin-left:4px">' + wDone + ' done</span>' : '')
+        + '</div>';
+    });
+
+    var cardId = 'lgacard_' + lga.did;
+    var card = document.createElement('div');
+    card.className = 'lga-card';
+    card.id = cardId;
+    card.innerHTML =
+      '<div class="lga-card-header" onclick="toggleLga('' + cardId + '')">'
+        + '<div class="lga-card-left">'
+          + '<div class="lga-card-name">' + lga.name + '</div>'
+          + '<div class="lga-card-counts">' + uploaded + ' / ' + total + ' uploaded'
+            + (done > 0 ? ' &nbsp;&bull;&nbsp; ' + done + ' done' : '')
+          + '</div>'
+        + '</div>'
+        + '<div class="lga-card-right">'
+          + '<span class="lga-pct-badge" style="' + badgeColor + '">' + pct + '%</span>'
+          + '<span class="lga-toggle" id="toggle_' + cardId + '">&#9660;</span>'
+        + '</div>'
+      + '</div>'
+      + '<div class="lga-mini-bar"><div class="lga-mini-fill" style="width:' + pct + '%"></div></div>'
+      + '<div class="lga-body" id="body_' + cardId + '">' + wardRows + '</div>';
+
+    grid.appendChild(card);
+  });
+}
+
+function toggleLga(cardId) {
+  var body   = document.getElementById('body_' + cardId);
+  var toggle = document.getElementById('toggle_' + cardId);
+  if (body.classList.contains('open')) {
+    body.classList.remove('open');
+    toggle.classList.remove('open');
+  } else {
+    body.classList.add('open');
+    toggle.classList.add('open');
+  }
 }
 
 // ── TABLE ─────────────────────────────────────────────────
