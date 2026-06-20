@@ -531,7 +531,17 @@ function processLgas(lgas) {
             return apiGet('elections/' + EID + '/pus?ward=' + wid)
               .then(function(pus) {
                 pus.forEach(function(pu) {
-                  all.push({ lga: lgaName, lgaDid: lgaDid, ward: wn, wardId: wid, code: pu.pu_code || pu.code || '', name: pu.name || '', imgUrl: getImg(pu), uploadedAt: getT(pu) });
+                  var c   = pu.pu_code || pu.code || '';
+                  var img = getImg(pu);
+                  var ex  = all.find(function(p) { return p.code === c; });
+                  if (!ex) {
+                    // New PU — add it
+                    all.push({ lga: lgaName, lgaDid: lgaDid, ward: wn, wardId: wid, code: c, name: pu.name || '', imgUrl: img, uploadedAt: getT(pu) });
+                  } else if (!ex.imgUrl && img) {
+                    // Existing PU that now has an image — update it
+                    ex.imgUrl = img;
+                    ex.uploadedAt = getT(pu);
+                  }
                 });
               })
               .catch(function() {});
