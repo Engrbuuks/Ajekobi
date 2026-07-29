@@ -58,6 +58,24 @@ body{font-family:"Plus Jakarta Sans",sans-serif;background:var(--bg);color:var(-
 .pfill{height:100%;border-radius:99px;background:linear-gradient(90deg,#7c3aed,#a855f7);transition:width 1.2s}
 .plbls{display:flex;justify-content:space-between;margin-top:6px}
 .plbls span{font-size:11px;color:var(--t3);font-family:"JetBrains Mono",monospace}
+
+/* RESULTS TALLY */
+.tally-sec{margin-bottom:16px}
+.tally-title{font-size:13px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px;color:var(--tx)}
+.tally-title::before{content:"";display:block;width:4px;height:16px;background:var(--am);border-radius:2px}
+.tally-badge{font-size:10px;font-weight:700;color:var(--am);background:var(--al);padding:2px 8px;border-radius:99px;margin-left:6px}
+.tally-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.tally-card{background:var(--w);border:1px solid var(--bd);border-radius:var(--r);padding:14px 16px;box-shadow:var(--sh);position:relative;overflow:hidden}
+.tally-card.lead{border-color:var(--g);border-width:2px}
+.tally-party{font-size:15px;font-weight:800;color:var(--tx);letter-spacing:-.3px}
+.tally-votes{font-size:24px;font-weight:800;font-family:"JetBrains Mono",monospace;color:var(--g);letter-spacing:-1px;line-height:1.1;margin-top:4px}
+.tally-pct{font-size:11px;color:var(--t3);margin-top:2px;font-family:"JetBrains Mono",monospace}
+.tally-bar{margin-top:8px;height:6px;background:var(--s2);border-radius:99px;overflow:hidden}
+.tally-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--g),var(--gm));transition:width 1s}
+.tally-lead-tag{position:absolute;top:10px;right:10px;font-size:9px;font-weight:700;color:#fff;background:var(--g);padding:2px 7px;border-radius:99px}
+.tally-meta{font-size:11px;color:var(--t3);font-family:"JetBrains Mono",monospace;margin-bottom:10px}
+@media(min-width:600px){.tally-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:900px){.tally-grid{grid-template-columns:repeat(5,1fr)}}
 /* LGA CARDS */
 .lga-sec{margin-bottom:16px}
 .lga-title{font-size:13px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
@@ -106,7 +124,7 @@ select,.si{font-family:"Plus Jakarta Sans",sans-serif;font-size:13px;background:
 .tbar-r{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .srch{font-family:"JetBrains Mono",monospace;font-size:12px;background:var(--s2);border:1px solid var(--b2);border-radius:var(--rs);padding:7px 10px;color:var(--tx);width:180px;outline:none}
 .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
-table{width:100%;border-collapse:collapse;min-width:580px}
+table{width:100%;border-collapse:collapse;min-width:680px}
 thead{background:var(--s2)}
 th{padding:10px 12px;font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.07em;text-align:left;white-space:nowrap;border-bottom:1px solid var(--bd)}
 td{padding:11px 12px;font-size:13px;border-bottom:1px solid var(--bd);vertical-align:middle}
@@ -185,6 +203,12 @@ tbody tr.rdone td{background:#faf5ff}
     <div class="ptrack"><div class="pfill" id="pfill" style="width:0%"></div></div>
     <div class="plbls"><span><strong id="pdone">0</strong> aggregated</span><span><strong id="ptot">0</strong> total</span></div>
   </div>
+  <!-- RESULTS TALLY -->
+  <div class="tally-sec" id="tallySec" style="display:none">
+    <div class="tally-title">Live Results Tally <span class="tally-badge" id="tallyBadge">AI-EXTRACTED</span></div>
+    <div class="tally-meta" id="tallyMeta">Awaiting extracted results...</div>
+    <div class="tally-grid" id="tallyGrid"></div>
+  </div>
   <div class="lga-sec" id="lgaSec" style="display:none">
     <div class="lga-title">Results by LGA</div>
     <div class="lga-grid" id="lgaGrid"></div>
@@ -229,7 +253,7 @@ tbody tr.rdone td{background:#faf5ff}
 
 <script>
 var BASE   = 'https://dolphin-app-sleqh.ondigitalocean.app/api/v1';
-var WEBAPP = 'https://script.google.com/macros/s/AKfycbz36qD1p9wrXSiNLjigXLrGjhOiFNg3nm6X-ndO6_7xadQ_03NYv03AaEWvSqHEp8wC/exec';
+var WEBAPP = 'https://script.google.com/macros/s/AKfycbwiT_luOBA9FWpjCNFG5ZXSfFFtFtJ6xwOVFZ1caSpXtl5zAvR_NN0Qqr65jlfIMDxA/exec';
 var ENAME  = 'Ekiti 2026 Governorship';
 var RPP    = 50;
 var RSEC   = 90;
@@ -261,6 +285,95 @@ function loadDone() {
     .then(function(j) { doneMap = j.done || {}; updStats(); renderTable(); renderLgaCards(); })
     .catch(function() {});
 }
+
+// ── AI-EXTRACTED RESULTS ──────────────────────────────────
+var resultsMap = {};
+var PARTIES = ['APC','PDP','LP','NNPP','APGA','ADC','SDP','YPP','AA','ADP'];
+
+var extractQueue = [];
+var extracting = false;
+
+function loadResults() {
+  fetch(WEBAPP + '?action=results&t=' + Date.now(), { redirect: 'follow' })
+    .then(function(r) { return r.json(); })
+    .then(function(j) {
+      resultsMap = j.results || {};
+      renderTally(j.tally || {}, j.puCount || 0);
+      renderTable();
+      queueExtractions();
+    })
+    .catch(function() {});
+}
+
+// Find uploaded PUs that have no extracted figures yet, and queue them
+function queueExtractions() {
+  all.forEach(function(p) {
+    if (p.imgUrl && !resultsMap[p.code] && extractQueue.indexOf(p.code) < 0) {
+      extractQueue.push(p.code);
+    }
+  });
+  processExtractQueue();
+}
+
+// Process the queue one at a time so we never overwhelm the free tier
+function processExtractQueue() {
+  if (extracting || !extractQueue.length) return;
+  extracting = true;
+  var code = extractQueue.shift();
+  var pu = all.find(function(p) { return p.code === code; });
+  if (!pu || !pu.imgUrl) { extracting = false; processExtractQueue(); return; }
+
+  fetch(WEBAPP + '?action=extract&code=' + encodeURIComponent(code) +
+        '&url=' + encodeURIComponent(pu.imgUrl) + '&t=' + Date.now(), { redirect: 'follow' })
+    .then(function(r) { return r.json(); })
+    .then(function(res) {
+      if (res && !res.error) {
+        resultsMap[code] = res;
+        renderTable();
+      }
+    })
+    .catch(function() {})
+    .then(function() {
+      extracting = false;
+      setTimeout(processExtractQueue, 2000); // 2s gap between extractions
+    });
+}
+
+function renderTally(tally, puCount) {
+  var parties = PARTIES.map(function(p) { return { name: p, votes: tally[p] || 0 }; })
+    .filter(function(p) { return p.votes > 0; })
+    .sort(function(a, b) { return b.votes - a.votes; });
+
+  if (!parties.length) { document.getElementById('tallySec').style.display = 'none'; return; }
+
+  document.getElementById('tallySec').style.display = 'block';
+  var totalVotes = parties.reduce(function(s, p) { return s + p.votes; }, 0);
+  var extractedCount = Object.keys(resultsMap).length;
+  document.getElementById('tallyMeta').textContent =
+    'Total valid votes: ' + totalVotes.toLocaleString() +
+    '  \u2022  ' + extractedCount + ' polling units extracted';
+
+  var grid = document.getElementById('tallyGrid');
+  grid.innerHTML = '';
+  var maxVotes = parties[0].votes;
+
+  parties.forEach(function(p, i) {
+    var pct = totalVotes ? (p.votes / totalVotes * 100) : 0;
+    var barPct = maxVotes ? (p.votes / maxVotes * 100) : 0;
+    var card = document.createElement('div');
+    card.className = 'tally-card' + (i === 0 ? ' lead' : '');
+    var lead = i === 0 ? '<span class="tally-lead-tag">LEADING</span>' : '';
+    card.innerHTML =
+      lead +
+      '<div class="tally-party">' + p.name + '</div>' +
+      '<div class="tally-votes">' + p.votes.toLocaleString() + '</div>' +
+      '<div class="tally-pct">' + pct.toFixed(1) + '% of tallied</div>' +
+      '<div class="tally-bar"><div class="tally-fill" style="width:' + barPct + '%"></div></div>';
+    grid.appendChild(card);
+  });
+}
+
+
 
 function markDone(code) {
   if (doneMap[code]) {
@@ -311,7 +424,9 @@ function fetchAll() {
     .then(function() {
       buildWardDropdown();
       loadDone();
+      loadResults();
       setInterval(loadDone, 90000);
+      setInterval(loadResults, 90000);
       var now = new Date().toLocaleTimeString();
       document.getElementById('stxt').textContent = 'Loaded ' + all.length + ' PUs at ' + now;
       flash();
@@ -407,6 +522,7 @@ function fastRefresh() {
       var s = j.data || {};
       setStatCards(s.pus || 0, s.documents || 0);
       loadDone();
+      loadResults();
       var now = new Date().toLocaleTimeString();
       document.getElementById('stxt').textContent = 'Refreshed at ' + now;
       flash();
@@ -610,7 +726,7 @@ function renderTable() {
   var wrap = document.createElement('div'); wrap.className = 'tscroll';
   var tbl  = document.createElement('table');
   var th   = document.createElement('thead');
-  th.innerHTML = '<tr><th>#</th><th>LGA</th><th>Ward</th><th>PU Code</th><th>PU Name</th><th>Status</th><th>Result</th><th>Aggregated</th></tr>';
+  th.innerHTML = '<tr><th>#</th><th>LGA</th><th>Ward</th><th>PU Code</th><th>PU Name</th><th>Status</th><th>Result</th><th>Figures (AI)</th><th>Aggregated</th></tr>';
   var tb = document.createElement('tbody');
   pg.forEach(function(pu, i) {
     var n=start+i+1, has=!!pu.imgUrl, isDone=!!doneMap[pu.code];
@@ -626,6 +742,19 @@ function renderTable() {
     if(has){var vb=document.createElement('button');vb.className='vbtn';vb.textContent='View';vb.setAttribute('data-url',pu.imgUrl);vb.setAttribute('data-name',pu.name);vb.setAttribute('data-code',pu.code);vb.onclick=function(){openM(this.getAttribute('data-url'),this.getAttribute('data-name'),this.getAttribute('data-code'));};vtd.appendChild(vb);}
     else vtd.innerHTML='<span style="color:var(--t3)">-</span>';
     tr.appendChild(vtd);
+    // AI-extracted figures cell
+    var ftd=document.createElement('td');
+    var res=resultsMap[pu.code];
+    if(res && res.winner){
+      var win=res.winner;
+      var winVotes=res.parties && res.parties[win]!=null ? res.parties[win] : '';
+      ftd.innerHTML='<span style="font-family:JetBrains Mono,monospace;font-size:11px"><strong style="color:var(--g)">'+win+'</strong> '+(winVotes!==''?Number(winVotes).toLocaleString():'')+'<br><span style="color:var(--t3);font-size:10px">valid: '+(res.valid!=null?Number(res.valid).toLocaleString():'-')+'</span></span>';
+    } else if(has){
+      ftd.innerHTML='<span style="color:var(--t3);font-size:10px">extracting...</span>';
+    } else {
+      ftd.innerHTML='<span style="color:var(--t3)">-</span>';
+    }
+    tr.appendChild(ftd);
     var dtd=document.createElement('td');
     if(has){var db=document.createElement('button');db.className=isDone?'dbtn done':'dbtn';db.innerHTML=isDone?'&#10003; Done':'Mark Done';db.setAttribute('data-code',pu.code);db.onclick=function(){markDone(this.getAttribute('data-code'));};dtd.appendChild(db);}
     else dtd.innerHTML='<span style="color:var(--t3)">-</span>';
@@ -676,8 +805,12 @@ function flash(){var d=document.getElementById('sdot');d.style.opacity='1';setTi
 
 function expCSV(){
   if(!filtered.length){showToast('No data');return;}
-  var h=['LGA','Ward','PU Code','PU Name','Status','Aggregated','Uploaded At','Image URL'];
-  var rows=filtered.map(function(p){return[p.lga,p.ward,p.code,'"'+p.name+'"',p.imgUrl?'Uploaded':'Pending',doneMap[p.code]?'Done':'Not Done',p.uploadedAt,p.imgUrl];});
+  var h=['LGA','Ward','PU Code','PU Name','Status','Aggregated','Winner','Valid Votes','Accredited','Rejected','Total'].concat(PARTIES).concat(['Uploaded At','Image URL']);
+  var rows=filtered.map(function(p){
+    var res=resultsMap[p.code]||{};
+    var pv=PARTIES.map(function(pt){return (res.parties&&res.parties[pt]!=null)?res.parties[pt]:'';});
+    return[p.lga,p.ward,p.code,'"'+p.name+'"',p.imgUrl?'Uploaded':'Pending',doneMap[p.code]?'Done':'Not Done',res.winner||'',res.valid!=null?res.valid:'',res.accredited!=null?res.accredited:'',res.rejected!=null?res.rejected:'',res.total!=null?res.total:''].concat(pv).concat([p.uploadedAt,p.imgUrl]);
+  });
   var csv=[h].concat(rows).map(function(r){return r.join(',');}).join('\n');
   var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='ekiti_results.csv';a.click();
   showToast('CSV exported!');
